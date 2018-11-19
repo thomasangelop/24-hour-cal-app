@@ -52,7 +52,7 @@ class App extends Component {
             they will see the info page instead. */}
             <ProtectedRoute
               exact
-              path="/info"
+              path="/preferences"
               component={PreferencesPage}
             />
             {/* If none of the other routes matched, we will show a 404. */}
