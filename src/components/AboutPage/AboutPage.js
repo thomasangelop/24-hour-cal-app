@@ -8,8 +8,15 @@ import React from 'react';
 const AboutPage = () => (
   <div>
     <div>
+      <h3>What is 24 Hour Cal?</h3>
       <p>
-        This about page is for anyone to read!
+        Imagine this: 
+        60 seconds. 60 minutes. 24 hours. All measurements of time that occur in one day. 
+        Everyone is busy and needs to have their time planned out efficiently and effectively. 
+        This application will help people easily plan out events with preset preferences.
+      </p>
+      <p>
+        TLDR: A calendar app that helps people easily create event with saved preferences.
       </p>
     </div>
   </div>
