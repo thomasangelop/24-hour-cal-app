@@ -1,5 +1,7 @@
 import React from 'react';
 import CreateNewP from './CreateNewP';
+import EditP from './EditP';
+import DeleteP from './DeleteP';
 
 // This is one of our simplest components
 // It doesn't have local state, so it can be a function component.
@@ -13,6 +15,13 @@ const PreferencesPage = () => (
     Create or delete a new preference type.
     </p>
     <CreateNewP />
+    <ul>
+      <li>Work <EditP /><DeleteP /></li>
+      <li>Hobby <EditP /><DeleteP /></li>
+      <li>Fitness <EditP /><DeleteP /></li>
+      <li>Food <EditP /><DeleteP /></li>
+      <li>Sleep <EditP /><DeleteP /></li>
+    </ul>
   </div>
 );
 
