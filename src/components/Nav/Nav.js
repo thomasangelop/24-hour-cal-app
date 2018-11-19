@@ -3,9 +3,23 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+        main: '#d60e58',
+      },
+    secondary: {
+      main: '#6ec95c',
+    },
+  },
+});
 
 const Nav = (props) => (
   <div className="nav">
+  <MuiThemeProvider theme={theme}>
     <Link to="/myCalendar">
       <h2 className="nav-title">24 Hour Cal</h2>
     </Link>
@@ -30,6 +44,7 @@ const Nav = (props) => (
         </>
       )}
     </div>
+  </MuiThemeProvider>
   </div>
 );
 

@@ -26,13 +26,3 @@ CREATE TABLE "events" (
 	"time_duration" TIME,
 	"days_out_of_the_week" varchar (255)
 );
-
-
-
-
-
-
-
-
-
-
