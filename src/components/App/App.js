@@ -19,6 +19,20 @@ import PreferencesPage from '../PreferencesPage/PreferencesPage';
 
 import './App.css';
 
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+        main: '#d60e58',
+      },
+    secondary: {
+      main: '#6ec95c',
+    },
+  },
+});
+
 class App extends Component {
   componentDidMount () {
     this.props.dispatch({type: 'FETCH_USER'})
@@ -28,6 +42,7 @@ class App extends Component {
     return (
       <Router>
         <div>
+        <MuiThemeProvider theme={theme}>
           <Nav />
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/myCalendar */}
@@ -59,6 +74,7 @@ class App extends Component {
             <Route render={() => <h1>404</h1>} />
           </Switch>
           <Footer />
+          </MuiThemeProvider>
         </div>
       </Router>
   )}

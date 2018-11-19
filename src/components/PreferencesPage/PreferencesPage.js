@@ -1,4 +1,5 @@
 import React from 'react';
+import CreateNewP from './CreateNewP';
 
 // This is one of our simplest components
 // It doesn't have local state, so it can be a function component.
@@ -7,9 +8,11 @@ import React from 'react';
 
 const PreferencesPage = () => (
   <div>
+    <h3>Preferences</h3>
     <p>
-    Preferences Page
+    Create or delete a new preference type.
     </p>
+    <CreateNewP />
   </div>
 );
 
