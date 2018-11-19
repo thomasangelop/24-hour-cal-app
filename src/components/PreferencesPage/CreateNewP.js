@@ -12,6 +12,10 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
+//checkbox inports
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+
 
 const styles = theme => ({
   button: {
@@ -37,6 +41,17 @@ class CreateNewP extends React.Component {
 
   state = {
       open: false,
+      monday: false,
+      tuesday: false,
+      wednesday: false,
+      thursday: false,
+      friday: false,
+      saturday: false,
+      sunday: false,
+  };
+
+  handleChange = name => event => {
+    this.setState({ [name]: event.target.checked });
   };
 
   handleClickOpen = () => {
@@ -100,13 +115,69 @@ class CreateNewP extends React.Component {
              shrink: true,
              }}
              />
-            <TextField
-              margin="dense"
-              id="name"
-              label="Days Of The Week"
-              type="email"
-              fullWidth
-            />
+             <FormControlLabel
+                control={
+                <Checkbox
+                checked={this.state.monday}
+                 onChange={this.handleChange('monday')}
+                 value="monday"
+                 indeterminate/>}
+                label="Monday"
+             />
+             <FormControlLabel
+                control={
+                <Checkbox
+                checked={this.state.tuesday}
+                 onChange={this.handleChange('tuesday')}
+                 value="tuesday"
+                 indeterminate/>}
+                label="Tuesday"
+             />
+             <FormControlLabel
+                control={
+                <Checkbox
+                checked={this.state.wednesday}
+                 onChange={this.handleChange('wednesday')}
+                 value="wednesday"
+                 indeterminate/>}
+                label="Wednesday"
+             />
+             <FormControlLabel
+                control={
+                <Checkbox
+                checked={this.state.thursday}
+                 onChange={this.handleChange('thursday')}
+                 value="thursday"
+                 indeterminate/>}
+                label="Thursday"
+             />
+             <FormControlLabel
+                control={
+                <Checkbox
+                checked={this.state.friday}
+                 onChange={this.handleChange('friday')}
+                 value="friday"
+                 indeterminate/>}
+                label="Friday"
+             />
+             <FormControlLabel
+                control={
+                <Checkbox
+                checked={this.state.saturday}
+                 onChange={this.handleChange('saturday')}
+                 value="saturday"
+                 indeterminate/>}
+                label="Saturday"
+             />
+             <FormControlLabel
+                control={
+                <Checkbox
+                checked={this.state.sunday}
+                 onChange={this.handleChange('sunday')}
+                 value="sunday"
+                 indeterminate/>}
+                label="Sunday"
+             />
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} color="primary">
