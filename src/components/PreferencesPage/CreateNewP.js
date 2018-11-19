@@ -25,17 +25,27 @@ const theme = createMuiTheme({
     },
   });
 
-function CreateNewP(props) {
-  const { classes } = props;
+class CreateNewP extends React.Component {
+
+    handleClick = () => {
+        console.log('create new preference button was clicked');
+        
+    }
+
+    render() {
+  const { classes } = this.props;
+
+
   return (
     <div>
       <MuiThemeProvider theme={theme}>
-        <Button variant="contained" color="primary" className={classes.button}>
+        <Button variant="contained" color="primary" className={classes.button} onClick={this.handleClick}>
             Create New Preference
         </Button>
       </MuiThemeProvider>
     </div>
   );
+}
 }
 
 CreateNewP.propTypes = {
