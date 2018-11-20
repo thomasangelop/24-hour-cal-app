@@ -3,13 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    const sqlText = `SELECT projects.id, projects.name, projects.description, 
-    projects.thumbnail, projects.website, projects.github, projects.date_completed, 
-    tags.name AS tag_name FROM projects JOIN tags ON projects.tag_id=tags.id ORDER 
-
-    WHERE person_id = ${req.user.id}
-    
-    BY projects.name;`;
+    const sqlText = `SELECT * FROM userpreferences WHERE person_id=${req.user.id};`;
     pool.query(sqlText)
         .then((result) => {
             console.log(`Got stuff back from the database`, result);

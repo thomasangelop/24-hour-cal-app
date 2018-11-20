@@ -27,7 +27,7 @@ function* setPrefSaga() {
 }
 
 function* prefSaga() {
-  yield takeLatest('FETCH_USER', setPrefSaga);
+  yield takeLatest('FETCH_PREF', setPrefSaga);
 }
 
 export default prefSaga;
