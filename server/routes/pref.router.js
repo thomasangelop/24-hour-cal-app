@@ -6,6 +6,9 @@ router.get('/', (req, res) => {
     const sqlText = `SELECT projects.id, projects.name, projects.description, 
     projects.thumbnail, projects.website, projects.github, projects.date_completed, 
     tags.name AS tag_name FROM projects JOIN tags ON projects.tag_id=tags.id ORDER 
+
+    WHERE person_id = ${req.user.id}
+    
     BY projects.name;`;
     pool.query(sqlText)
         .then((result) => {
