@@ -44,32 +44,47 @@ class PreferencesPage extends React.Component {
 
   render() {
     const { classes } = this.props;
+    console.log('pref:',this.props.reduxState.pref);
   return(
   <div>
     <h3>Preferences</h3>
     <p>
     Create or delete a new preference type.
     </p>
+    <pre>{JSON.stringify(this.props.reduxState.pref)}</pre>
     <CreateNewP />
     <div>
-      <Paper className={classes.root} elevation={1}>
-        <Typography variant="h5" component="h3">
-          Work
-        </Typography>
-        <EditP /><DeleteP />
-      </Paper>
-      <Paper className={classes.root} elevation={1}>
-        <Typography variant="h5" component="h3">
-          Hobby
-        </Typography>
-        <EditP /><DeleteP />
-      </Paper>
-      <Paper className={classes.root} elevation={1}>
-        <Typography variant="h5" component="h3">
-          Fitness
-        </Typography>
-        <EditP /><DeleteP />
-      </Paper>
+      {/* {this.props.reduxState.pref.map(taco => (
+        <p key={taco.id}/>
+      ))} */}
+
+      {this.props.reduxState.pref.map(preferences => (
+          <Paper className={classes.root} elevation={1} key={preferences.id}>
+            <Typography variant="h5" component="h3">
+             {preferences.type_name}
+             </Typography>
+             <Typography>
+             <p>Type Name: {preferences.type_name}</p>
+             </Typography>
+             <Typography>
+             <p>Start Date: {preferences.start_date}</p>
+             </Typography>
+             <Typography>
+             <p>End Date: {preferences.end_date}</p>
+             </Typography>
+             <Typography>
+             <p>Amount of Time in Hours: {preferences.time_duration.hours}</p>
+             </Typography>
+             <Typography>
+             <p>Amount of Time in Minutes: {preferences.time_duration.minutes}</p>
+             </Typography>
+             <Typography>
+             <p>Days Out of the Week: {preferences.days_out_of_the_week}</p>
+             </Typography>
+             <EditP /><DeleteP />
+          </Paper>
+      )
+      )}
     </div>
   </div>
   )

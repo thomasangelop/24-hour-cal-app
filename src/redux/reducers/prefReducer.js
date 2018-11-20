@@ -1,5 +1,5 @@
 // Used to store pref returned from the server
-const prefReducer = (state = {}, action) => {
+const prefReducer = (state = [], action) => {
     switch (action.type) {
       case 'SET_PREF':
         return action.payload;
