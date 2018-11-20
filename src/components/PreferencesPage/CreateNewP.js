@@ -11,6 +11,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 //checkbox inports
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -23,6 +24,10 @@ const styles = theme => ({
   },
   input: {
     display: 'none',
+  },
+  textField: {
+    padding: 15,
+    margin: 10,
   },
 });
 
@@ -95,6 +100,7 @@ class CreateNewP extends React.Component {
               type="text"
               fullWidth
             />
+            <br />
             <TextField
              id="datetime-local"
              label="Start Date"
@@ -105,6 +111,7 @@ class CreateNewP extends React.Component {
              shrink: true,
              }}
              />
+             <br />
              <TextField
              id="datetime-local"
              label="End Date"
@@ -115,6 +122,34 @@ class CreateNewP extends React.Component {
              shrink: true,
              }}
              />
+             <br />
+             <TextField
+              id="filled-adornment-weight"
+              className={classes.margin}
+              className={classes.textField}
+              label="Duration (Hours)"
+              InputProps={{
+              endAdornment: (
+                <InputAdornment variant="filled" position="end">
+                  Hours
+                </InputAdornment>
+              ),
+              }}
+              />
+              <TextField
+              id="filled-adornment-weight"
+              className={classes.margin}
+              className={classes.textField}
+              label="Duration (Minutes)"
+              InputProps={{
+              endAdornment: (
+                <InputAdornment variant="filled" position="end">
+                  Minutes
+                </InputAdornment>
+              ),
+              }}
+              />
+              <br />
              <FormControlLabel
                 control={
                 <Checkbox
@@ -124,6 +159,7 @@ class CreateNewP extends React.Component {
                  indeterminate/>}
                 label="Monday"
              />
+             <br />
              <FormControlLabel
                 control={
                 <Checkbox
@@ -133,6 +169,7 @@ class CreateNewP extends React.Component {
                  indeterminate/>}
                 label="Tuesday"
              />
+             <br />
              <FormControlLabel
                 control={
                 <Checkbox
@@ -142,6 +179,7 @@ class CreateNewP extends React.Component {
                  indeterminate/>}
                 label="Wednesday"
              />
+             <br />
              <FormControlLabel
                 control={
                 <Checkbox
@@ -151,6 +189,7 @@ class CreateNewP extends React.Component {
                  indeterminate/>}
                 label="Thursday"
              />
+             <br />
              <FormControlLabel
                 control={
                 <Checkbox
@@ -160,6 +199,7 @@ class CreateNewP extends React.Component {
                  indeterminate/>}
                 label="Friday"
              />
+             <br />
              <FormControlLabel
                 control={
                 <Checkbox
@@ -169,6 +209,7 @@ class CreateNewP extends React.Component {
                  indeterminate/>}
                 label="Saturday"
              />
+             <br />
              <FormControlLabel
                 control={
                 <Checkbox
