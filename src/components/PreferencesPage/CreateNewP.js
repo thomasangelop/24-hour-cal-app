@@ -67,11 +67,6 @@ class CreateNewP extends React.Component {
     this.setState({ open: false });
   };
 
-  handleClick = () => {
-    console.log('create new preference button was clicked');
-    
-  }
-
   render() {
     const { classes } = this.props;
 
@@ -79,7 +74,7 @@ class CreateNewP extends React.Component {
   return (
     <div>
       <MuiThemeProvider theme={theme}>
-        <Button variant="contained" color="primary" className={classes.button} onClick={this.handleClick} onClick={this.handleClickOpen}>
+        <Button variant="contained" color="primary" className={classes.button} onClick={this.handleClickOpen}>
             Create New Preference
         </Button>
         <Dialog
@@ -125,7 +120,6 @@ class CreateNewP extends React.Component {
              <br />
              <TextField
               id="filled-adornment-weight"
-              className={classes.margin}
               className={classes.textField}
               label="Duration (Hours)"
               InputProps={{
@@ -138,7 +132,6 @@ class CreateNewP extends React.Component {
               />
               <TextField
               id="filled-adornment-weight"
-              className={classes.margin}
               className={classes.textField}
               label="Duration (Minutes)"
               InputProps={{
