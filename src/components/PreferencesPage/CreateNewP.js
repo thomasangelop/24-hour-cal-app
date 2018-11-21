@@ -53,10 +53,24 @@ class CreateNewP extends React.Component {
       friday: false,
       saturday: false,
       sunday: false,
+          person_id: 0,
+          type_name: '',
+          start_date: '',
+          end_date: '',
+          time_duration: '',
+          days_out_of_the_week: '',
   };
 
-  handleChange = name => event => {
-    this.setState({ [name]: event.target.checked });
+  // handleChange = name => event => {
+  //   this.setState({ [name]: event.target.checked });
+  //   console.log('what is name?:', name);
+  // };
+
+  handleChangePref = (event) => {
+    event.preventDefault();
+    this.setState({ [event.target.name]: event.target.value });
+    console.log('what is state of input?:', this.state);
+    
   };
 
   handleClickOpen = () => {
@@ -64,7 +78,10 @@ class CreateNewP extends React.Component {
   };
 
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({ 
+      open: false,
+      // [name]: event.target.checked
+    });
   };
 
   render() {
@@ -94,10 +111,13 @@ class CreateNewP extends React.Component {
               label="Preference Type Name"
               type="text"
               fullWidth
+              name='type_name'
+              value={this.state.type_name}
+              onChange={this.handleChangePref}
             />
             <br />
             <TextField
-             id="datetime-local"
+            //  id="datetime-local"
              label="Start Date"
              type="datetime-local"
              defaultValue="2018-11-24T12:30"
@@ -105,10 +125,13 @@ class CreateNewP extends React.Component {
              InputLabelProps={{
              shrink: true,
              }}
+             name="start_date"
+             value={this.state.start_date}
+             onChange={this.handleChangePref}
              />
              <br />
              <TextField
-             id="datetime-local"
+            //  id="datetime-local"
              label="End Date"
              type="datetime-local"
              defaultValue="2018-11-24T12:30"
@@ -116,6 +139,9 @@ class CreateNewP extends React.Component {
              InputLabelProps={{
              shrink: true,
              }}
+             name="end_date"
+             value={this.state.end_date}
+             onChange={this.handleChangePref}
              />
              <br />
              <TextField
@@ -129,6 +155,9 @@ class CreateNewP extends React.Component {
                 </InputAdornment>
               ),
               }}
+              name="time_duration"
+              value={this.state.time_duration}
+              onChange={this.handleChangePref}
               />
               <TextField
               id="filled-adornment-weight"
@@ -141,16 +170,34 @@ class CreateNewP extends React.Component {
                 </InputAdornment>
               ),
               }}
+              name="time_duration"
+              value={this.state.time_duration}
+              onChange={this.handleChangePref}
               />
               <br />
-             <FormControlLabel
+
+              <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              label="Days Out of the Week"
+              type="text"
+              fullWidth
+              name='days_out_of_the_week'
+              value={this.state.days_out_of_the_week}
+              onChange={this.handleChangePref}
+            />
+              {/* checkboxes for days of the week */}
+              <div>
+             {/* <FormControlLabel
                 control={
                 <Checkbox
                 checked={this.state.monday}
-                 onChange={this.handleChange('monday')}
+                //  onChange={this.handleChange('monday')}
                  value="monday"
                  indeterminate/>}
                 label="Monday"
+                onChange={this.handleChangePref}
              />
              <br />
              <FormControlLabel
@@ -211,7 +258,8 @@ class CreateNewP extends React.Component {
                  value="sunday"
                  indeterminate/>}
                 label="Sunday"
-             />
+             /> */}
+             </div>
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} color="primary">
