@@ -114,10 +114,6 @@ class PreferencesPage extends React.Component {
     this.setState({ open: false });
   };
 
-  handleClick = () => {
-    
-  };
-
   render() {
     const { classes } = this.props;
     console.log('pref:',this.props.reduxState.pref);
@@ -132,32 +128,32 @@ class PreferencesPage extends React.Component {
     <div>
       {this.props.reduxState.pref.map(preferences => (
           <Paper className={classes.root} elevation={1} key={preferences.id}>
-            <Typography variant="h5" component="h3">
+            <Typography variant="headline" component="h3">
              {preferences.type_name}
              </Typography>
              <Typography>
-             <p>Type Name: {preferences.type_name}</p>
+             Type Name: {preferences.type_name}
              </Typography>
              <Typography>
-             <p>Start Date: {preferences.start_date}</p>
+             Start Date: {preferences.start_date}
              </Typography>
              <Typography>
-             <p>End Date: {preferences.end_date}</p>
+             End Date: {preferences.end_date}
              </Typography>
              <Typography>
-             <p>Amount of Time in Hours: {preferences.time_duration.hours}</p>
+             Amount of Time in Hours: {preferences.time_duration.hours}
              </Typography>
              <Typography>
-             <p>Amount of Time in Minutes: {preferences.time_duration.minutes}</p>
+             Amount of Time in Minutes: {preferences.time_duration.minutes}
              </Typography>
              <Typography>
-             <p>Days Out of the Week: {preferences.days_out_of_the_week}</p>
+             Days Out of the Week: {preferences.days_out_of_the_week}
              </Typography>
              
              {/* Edit button div below */}
              <div>
               <MuiThemeProvider theme={theme}>
-                <Button variant="contained" color="secondary" style={{ cursor: 'pointer' }} className={classes.button} onClick={this.handleClick} onClick={this.handleClickOpen}>
+                <Button variant="contained" color="secondary" style={{ cursor: 'pointer' }} className={classes.button} onClick={this.handleClickOpen}>
                     Edit
                 </Button>
                 <Dialog
@@ -203,7 +199,6 @@ class PreferencesPage extends React.Component {
                     <br />
                     <TextField
                       id="filled-adornment-weight"
-                      className={classes.margin}
                       className={classes.textField}
                       label="Duration (Hours)"
                       InputProps={{
@@ -216,7 +211,6 @@ class PreferencesPage extends React.Component {
                       />
                       <TextField
                       id="filled-adornment-weight"
-                      className={classes.margin}
                       className={classes.textField}
                       label="Duration (Minutes)"
                       InputProps={{
