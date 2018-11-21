@@ -6,15 +6,17 @@
     padding-left: 10px;
 }
 
+/* bar coloring for navigation */
 .nav {
   overflow: hidden;
-  background-color: #00acb0;
+  background-color: #d60e58;
 }
 
+/* bar button coloring for navigation */
 .nav-link {
   float: left;
   color: #f2f2f2;
-  background-color: #00acb0;
+  background-color: #d60e58;
   text-align: center;
   padding: 24px 10px;
   text-decoration: none;
