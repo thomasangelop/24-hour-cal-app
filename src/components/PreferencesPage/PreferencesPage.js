@@ -31,6 +31,9 @@ const styles = theme => ({
 });
 
 class PreferencesPage extends React.Component {
+  state = {
+    key: 0,
+  }
   // when the page loads run this database call
   componentDidMount() {
     this.getPreferences();
@@ -42,6 +45,14 @@ class PreferencesPage extends React.Component {
     this.props.dispatch( { type: 'FETCH_PREF', payload: this.state} );
   }
 
+  handleChangeFor = key => event => {
+    this.setState({
+      [key]: event.target.value
+    })
+    console.log('handle change for key id');
+    
+  }
+
   render() {
     const { classes } = this.props;
     console.log('pref:',this.props.reduxState.pref);
@@ -51,13 +62,8 @@ class PreferencesPage extends React.Component {
     <p>
     Create or delete a new preference type.
     </p>
-    <pre>{JSON.stringify(this.props.reduxState.pref)}</pre>
     <CreateNewP />
     <div>
-      {/* {this.props.reduxState.pref.map(taco => (
-        <p key={taco.id}/>
-      ))} */}
-
       {this.props.reduxState.pref.map(preferences => (
           <Paper className={classes.root} elevation={1} key={preferences.id}>
             <Typography variant="h5" component="h3">
@@ -81,7 +87,7 @@ class PreferencesPage extends React.Component {
              <Typography>
              <p>Days Out of the Week: {preferences.days_out_of_the_week}</p>
              </Typography>
-             <EditP /><DeleteP />
+             <EditP key={preferences.id} onChange={this.handleChangeFor}/><DeleteP key={preferences.id}/>
           </Paper>
       )
       )}

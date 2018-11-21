@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
+
 
 // Form Dialogs inports
 import TextField from '@material-ui/core/TextField';
@@ -17,6 +19,10 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
+//setup redux state for global usage of information 
+const mapReduxStateToProps = reduxState => ({
+  reduxState
+});
 
 const styles = theme => ({
   button: {
@@ -68,18 +74,18 @@ class EditP extends React.Component {
   };
 
   handleClick = () => {
-    console.log('create new preference button was clicked');
     
-  }
+  };
 
   render() {
     const { classes } = this.props;
-
+    console.log('redux props:', this.props.reduxState.pref);
+    console.log('key id props:', this.props.key);
 
   return (
     <div>
       <MuiThemeProvider theme={theme}>
-        <Button variant="contained" color="secondary" className={classes.button} onClick={this.handleClick} onClick={this.handleClickOpen}>
+        <Button variant="contained" color="secondary" style={{ cursor: 'pointer' }} className={classes.button} onClick={this.handleClick} onClick={this.handleClickOpen}>
             Edit
         </Button>
         <Dialog
@@ -239,4 +245,4 @@ EditP.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(EditP);
+export default connect(mapReduxStateToProps)(withStyles(styles)(EditP));
