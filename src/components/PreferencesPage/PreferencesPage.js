@@ -116,7 +116,6 @@ class PreferencesPage extends React.Component {
 
   render() {
     const { classes } = this.props;
-    console.log('pref:',this.props.reduxState.pref);
   return(
   <div>
     <h3>Preferences</h3>
