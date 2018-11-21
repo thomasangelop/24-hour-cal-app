@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import CreateNewP from './CreateNewP';
 import { connect } from 'react-redux';
 
@@ -113,6 +114,21 @@ class PreferencesPage extends React.Component {
   handleClose = () => {
     this.setState({ open: false });
   };
+
+  handleRemove = (id) => {
+    console.log('deleting pref id:', id);
+    axios({
+      method: 'DELETE',
+      url: `/api/delete/${id}`
+    })
+    .then( (response) => {
+      this.getPreferences();
+      console.log(`deleted pref id: ${id} successfully`);
+    })
+    .catch( (error) => {
+      console.log(`error deleting project id: ${id}`);
+    })
+  }
 
   render() {
     const { classes } = this.props;
@@ -305,7 +321,7 @@ class PreferencesPage extends React.Component {
             {/* Delete button div below */}
             <div>
               <MuiThemeProvider theme={theme}>
-                <IconButton className={classes.button} aria-label="Delete">
+                <IconButton className={classes.button} aria-label="Delete" onClick={() => this.handleRemove(preferences.id)}>
                 <DeleteIcon />
                 </IconButton>
               </MuiThemeProvider>
