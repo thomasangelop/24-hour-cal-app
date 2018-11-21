@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
+
 
 // Form Dialogs inports
 import TextField from '@material-ui/core/TextField';
@@ -14,8 +16,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import InputAdornment from '@material-ui/core/InputAdornment';
 
 //checkbox inports
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+// import FormControlLabel from '@material-ui/core/FormControlLabel';
+// import Checkbox from '@material-ui/core/Checkbox';
 
 
 const styles = theme => ({
@@ -53,12 +55,12 @@ class CreateNewP extends React.Component {
       friday: false,
       saturday: false,
       sunday: false,
-          person_id: 0,
-          type_name: '',
-          start_date: '',
-          end_date: '',
-          time_duration: '',
-          days_out_of_the_week: '',
+      person_id: 0,
+      type_name: '',
+      start_date: '',
+      end_date: '',
+      time_duration: '',
+      days_out_of_the_week: '',
   };
 
   // handleChange = name => event => {
@@ -68,20 +70,34 @@ class CreateNewP extends React.Component {
 
   handleChangePref = (event) => {
     event.preventDefault();
-    this.setState({ [event.target.name]: event.target.value });
-    console.log('what is state of input?:', this.state);
-    
+    this.setState({ [event.target.name]: event.target.value });    
   };
 
   handleClickOpen = () => {
     this.setState({ open: true });
   };
 
-  handleClose = () => {
+  handleCloseCancel = () => {
     this.setState({ 
       open: false,
-      // [name]: event.target.checked
     });
+    console.log('create form was canceled');
+  };
+
+  handleCloseSave = () => {
+    this.setState({ 
+      open: false,
+    });
+    console.log('create form was saved');
+    this.props.dispatch( {type: 'ADD_NEW_PREF', payload: this.state})
+    //clear state
+    this.setState({
+      type_name: '',
+      start_date:'',
+      end_date:'',
+      time_duration:'',
+      days_out_of_the_week:''
+    })
   };
 
   render() {
@@ -262,10 +278,10 @@ class CreateNewP extends React.Component {
              </div>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.handleCloseCancel} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.handleCloseSave} color="primary">
               Save
             </Button>
           </DialogActions>
@@ -280,4 +296,4 @@ CreateNewP.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(CreateNewP);
+export default connect()(withStyles(styles)(CreateNewP));
