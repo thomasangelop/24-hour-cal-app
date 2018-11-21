@@ -19,6 +19,11 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 // import FormControlLabel from '@material-ui/core/FormControlLabel';
 // import Checkbox from '@material-ui/core/Checkbox';
 
+//setup redux state for global usage of information 
+const mapReduxStateToProps = reduxState => ({
+  reduxState
+});
+
 
 const styles = theme => ({
   button: {
@@ -55,7 +60,7 @@ class CreateNewP extends React.Component {
       friday: false,
       saturday: false,
       sunday: false,
-      person_id: 0,
+      person_id: this.props.reduxState.user.id,
       type_name: '',
       start_date: '',
       end_date: '',
@@ -63,10 +68,11 @@ class CreateNewP extends React.Component {
       days_out_of_the_week: '',
   };
 
-  // handleChange = name => event => {
-  //   this.setState({ [name]: event.target.checked });
-  //   console.log('what is name?:', name);
-  // };
+  getPreferences = () => {
+    //Dispatch action to get the preferences from the server
+    //This is picked up by the watcherSaga in index.js
+    this.props.dispatch( { type: 'FETCH_PREF', payload: this.state} );
+  }
 
   handleChangePref = (event) => {
     event.preventDefault();
@@ -98,6 +104,7 @@ class CreateNewP extends React.Component {
       time_duration:'',
       days_out_of_the_week:''
     })
+    this.getPreferences();
   };
 
   render() {
@@ -136,7 +143,7 @@ class CreateNewP extends React.Component {
             //  id="datetime-local"
              label="Start Date"
              type="datetime-local"
-             defaultValue="2018-11-24T12:30"
+             defaultValue="2018-12-19 13:23:54+02"
              className={classes.textField}
              InputLabelProps={{
              shrink: true,
@@ -150,7 +157,7 @@ class CreateNewP extends React.Component {
             //  id="datetime-local"
              label="End Date"
              type="datetime-local"
-             defaultValue="2018-11-24T12:30"
+             defaultValue="2018-12-19 13:23:54+02"
              className={classes.textField}
              InputLabelProps={{
              shrink: true,
@@ -296,4 +303,4 @@ CreateNewP.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default connect()(withStyles(styles)(CreateNewP));
+export default connect(mapReduxStateToProps)(withStyles(styles)(CreateNewP));
