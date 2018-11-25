@@ -8,7 +8,7 @@ import './Footer.css'
 
 const Footer = () => (
   <footer>
-    &copy; Thomas Angelo
+    &copy; 24 Hour Cal
   </footer>
 );
 

@@ -115,6 +115,7 @@ class PreferencesPage extends React.Component {
     this.setState({ open: false });
   };
 
+  //DELETE button funciton
   handleRemove = (id) => {
     console.log('deleting pref id:', id);
     axios({
