@@ -162,6 +162,11 @@ class PreferencesPage extends React.Component {
   handleCloseCancel = () => {
     this.setState({ 
       open: false,
+      type_name: '',
+      start_date: '',
+      end_date: '',
+      time_duration: '',
+      days_out_of_the_week: '',
     });
     console.log('edit form was canceled');
   };
@@ -233,10 +238,10 @@ class PreferencesPage extends React.Component {
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">Create A New Preference</DialogTitle>
+          <DialogTitle id="form-dialog-title">Edit Preference</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              To create a preference, please enter your info here.
+              To edit a preference, please adjust your info here.
             </DialogContentText>
             <TextField
               autoFocus
@@ -290,7 +295,7 @@ class PreferencesPage extends React.Component {
               ),
               }}
               name="time_duration"
-              value={this.state.time_duration}
+              value={this.state.time_duration.hours}
               onChange={this.handleChangePref}
               />
               <TextField
@@ -305,7 +310,7 @@ class PreferencesPage extends React.Component {
               ),
               }}
               name="time_duration"
-              value={this.state.time_duration}
+              value={this.state.time_duration.minutes}
               onChange={this.handleChangePref}
               />
               <br />

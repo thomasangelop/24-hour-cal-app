@@ -71,6 +71,7 @@ class CreateNewP extends React.Component {
   getPreferences = () => {
     //Dispatch action to get the preferences from the server
     //This is picked up by the watcherSaga in index.js
+    console.log('getting new prefs');
     this.props.dispatch( { type: 'FETCH_PREF', payload: this.state} );
   }
 
