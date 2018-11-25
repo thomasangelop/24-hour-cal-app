@@ -124,7 +124,7 @@ class PreferencesPage extends React.Component {
     })
     .then( (response) => {
       //what is the response? 
-      console.log('what is the response?:', response);
+      console.log('what is the response?:', response.data);
       
     })
     .catch( (error) => {
