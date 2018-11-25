@@ -125,13 +125,39 @@ class PreferencesPage extends React.Component {
     .then( (response) => {
       //what is the response? 
       console.log('what is the response?:', response.data);
-      
+      const editPref = response.data;
+      this.editGetPref(editPref);
     })
     .catch( (error) => {
       console.log(`error getting id: ${id} data from pg`);
       
     })
   };
+
+  editGetPref = (editPref) => {
+    console.log('editGetPref is working', editPref);
+    editPref.map(preference => {
+      this.setState({
+        type_name: preference.type_name,
+        start_date: preference.start_date,
+        end_date: preference.end_date,
+        time_duration: preference.time_duration,
+        days_out_of_the_week: preference.days_out_of_the_week,
+      })
+      // <p key={preference.id}>
+      
+      // </p>
+    })
+     // this.setState({ 
+      //   type_name: '',
+      //   start_date: '',
+      //   end_date: '',
+      //   time_duration: '',
+      //   days_out_of_the_week: '',
+      // })
+    console.log('new state:', this.state);
+      
+  }
 
   handleCloseCancel = () => {
     this.setState({ 
