@@ -115,8 +115,22 @@ class PreferencesPage extends React.Component {
     this.setState({ [event.target.name]: event.target.value });    
   };
 
-  handleClickOpen = () => {
+  handleClickOpen = (id) => {
     this.setState({ open: true });
+    //EDIT button clicked, get userpreference.id
+    axios({
+      method: 'GET',
+      url: `api/editget/${id}`
+    })
+    .then( (response) => {
+      //what is the response? 
+      console.log('what is the response?:', response);
+      
+    })
+    .catch( (error) => {
+      console.log(`error getting id: ${id} data from pg`);
+      
+    })
   };
 
   handleCloseCancel = () => {
@@ -185,7 +199,7 @@ class PreferencesPage extends React.Component {
              {/* Edit button div below */}
              <div>
               <MuiThemeProvider theme={theme}>
-                <Button variant="contained" color="secondary" style={{ cursor: 'pointer' }} className={classes.button} onClick={this.handleClickOpen}>
+                <Button variant="contained" color="secondary" style={{ cursor: 'pointer' }} className={classes.button} onClick={() => this.handleClickOpen(preferences.id)}>
                     Edit
                 </Button>
                 <Dialog
