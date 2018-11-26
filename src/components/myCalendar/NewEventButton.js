@@ -67,6 +67,8 @@ class NewEventButton extends React.Component {
       days_out_of_the_week: '',
   };
 
+  
+
   getPreferences = () => {
     //Dispatch action to get the preferences from the server
     //This is picked up by the watcherSaga in index.js

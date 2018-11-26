@@ -13,7 +13,7 @@ class WeeklyView extends React.Component {
         var now = new Date();
         
         this.state = {
-            myEvents: [{
+            events: [{
                 d: new Date(now.getFullYear(), now.getMonth(), 8, 8, 0),
                 text: 'Green box to post office',
                 color: '#6e7f29'
@@ -94,9 +94,9 @@ class WeeklyView extends React.Component {
                 text: 'Marisol OFF',
                 color: '#8701a9'
             }, {
-                start: new Date(now.getFullYear(), 9, 1),
-                end: new Date(now.getFullYear(), 9, 12),
-                text: 'Sharon OFF',
+                start: new Date('2018-11-26 12:00:00-06'),
+                end: new Date('2018-11-26 13:00:00-06'),
+                text: 'Lunch at Prime',
                 color: '#cc6699'
             }, {
                 d: '12/25',
@@ -153,7 +153,7 @@ class WeeklyView extends React.Component {
                     <mobiscroll.Eventcalendar
                         theme="24-hour-cal"
                         display="inline"
-                        data={this.state.myEvents}
+                        data={this.state.events}
                         view={{
                             calendar: { type: 'week' },
                             eventList: { type: 'week' }
