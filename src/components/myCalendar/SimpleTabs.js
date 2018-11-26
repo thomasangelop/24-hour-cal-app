@@ -7,6 +7,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import MonthlyView from './MonthlyView';
 import WeeklyView from './WeeklyView';
+import NewEvent from './NewEvent';
 
 function TabContainer(props) {
   return (
@@ -23,7 +24,7 @@ TabContainer.propTypes = {
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
+    // backgroundColor: theme.palette.background.paper,
     margin: 30,
   },
 });
@@ -47,10 +48,12 @@ class SimpleTabs extends React.Component {
           <Tabs value={value} onChange={this.handleChange}>
             <Tab label="My Calendar: Weekly View" />
             <Tab label="My Calendar: Monthly View" />
+            {/* <Tab label="Add New Event" /> */}
           </Tabs>
         </AppBar>
         {value === 0 && <TabContainer><WeeklyView /></TabContainer>}
         {value === 1 && <TabContainer><MonthlyView /></TabContainer>}
+        {/* {value === 2 && <TabContainer><NewEvent /></TabContainer>} */}
       </div>
     );
   }

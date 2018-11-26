@@ -1,182 +1,151 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { connect } from 'react-redux';
+import React, { Component } from 'react';
 
+/* import Mobiscroll JS and CSS */
+import mobiscroll from '@mobiscroll/react';
+import '@mobiscroll/react/dist/css/mobiscroll.react.min.css';
 
-// Form Dialogs inports
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-
-//checkbox inports
-// import FormControlLabel from '@material-ui/core/FormControlLabel';
-// import Checkbox from '@material-ui/core/Checkbox';
-
-//setup redux state for global usage of information 
-const mapReduxStateToProps = reduxState => ({
-  reduxState
-});
-
-
-const styles = theme => ({
-  button: {
-    margin: theme.spacing.unit,
-  },
-  input: {
-    display: 'none',
-  },
-  textField: {
-    padding: 15,
-    margin: 10,
-  },
-});
-
-const theme = createMuiTheme({
-    palette: {
-      primary: {
-          main: '#d60e58',
-        },
-      secondary: {
-        main: '#6ec95c',
-      },
-    },
-  });
-
-class NewEvent extends React.Component {
-
-  state = {
-      open: false,
-      monday: false,
-      tuesday: false,
-      wednesday: false,
-      thursday: false,
-      friday: false,
-      saturday: false,
-      sunday: false,
-      person_id: this.props.reduxState.user.id,
-      type_name: '',
-      // start_date: '',
-      // end_date: '',
-      time_duration: '',
-      days_out_of_the_week: '',
-  };
-
-  getPreferences = () => {
-    //Dispatch action to get the preferences from the server
-    //This is picked up by the watcherSaga in index.js
-    console.log('getting new prefs');
-    this.props.dispatch( { type: 'FETCH_PREF', payload: this.state} );
-  }
-
-  handleChangePref = (event) => {
-    event.preventDefault();
-    this.setState({ [event.target.name]: event.target.value });    
-  };
-
-  handleClickOpen = () => {
-    this.setState({ open: true });
-  };
-
-  handleCloseCancel = () => {
-    this.setState({ 
-      open: false,
-    });
-    console.log('create form was canceled');
-  };
-
-  handleCloseSave = () => {
-    this.setState({ 
-      open: false,
-    });
-    console.log('create form was saved');
-    this.props.dispatch( {type: 'ADD_NEW_PREF', payload: this.state})
-    //clear state
-    this.setState({
-      type_name: '',
-      // start_date:'',
-      // end_date:'',
-      time_duration:'',
-      days_out_of_the_week:''
-    })
-    this.getPreferences();
-  };
-
-  render() {
-    const { classes } = this.props;
-
-
-  return (
-    <div>
-      <MuiThemeProvider theme={theme}>
-        <Button variant="contained" color="primary" className={classes.button} onClick={this.handleClickOpen}>
-            Create New Preference
-        </Button>
-        <Dialog
-          open={this.state.open}
-          onClose={this.handleClose}
-          aria-labelledby="form-dialog-title"
-        >
-          <DialogTitle id="form-dialog-title">Create A New Preference</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              To create a preference, please enter your info here.
-            </DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              label="Preference Type Name"
-              type="text"
-              fullWidth
-              name='type_name'
-              value={this.state.type_name}
-              onChange={this.handleChangePref}
-            />
-             <br />
-             <TextField
-              id="filled-adornment-weight"
-              className={classes.textField}
-              label="Duration (Ex: '2 hours' or '20 minutes' or '2 hours, 20 minutes)"
-              name="time_duration"
-              value={this.state.time_duration}
-              onChange={this.handleChangePref}
-              />
-              <br />
-              <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              label="Days Out of the Week (Ex: 'M, W, T, F' or 'M')"
-              type="text"
-              fullWidth
-              name='days_out_of_the_week'
-              value={this.state.days_out_of_the_week}
-              onChange={this.handleChangePref}
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleCloseCancel} color="primary">
-              Cancel
-            </Button>
-            <Button onClick={this.handleCloseSave} color="primary">
-              Save
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </MuiThemeProvider>
-    </div>
-  );
-  }
-}
-
-NewEvent.propTypes = {
-  classes: PropTypes.object.isRequired,
+mobiscroll.settings = {
+  lang: 'en',
+  theme: 'material'
 };
 
-export default connect(mapReduxStateToProps)(withStyles(styles)(NewEvent));
+class NewEvent extends React.Component {
+  constructor(props) {
+      var now = new Date();
+      super(props);
+      this.state = {
+          eventText: '',
+          eventDesc: '',
+          eventDate: [now, new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours() + 2)],
+          myEvents: [{d: new Date(), text: 'Prime MVPs' }],
+          allDay: false,
+          isBusy: 'busy'
+      };
+      
+      this.textChange = this.textChange.bind(this);
+      this.descChange = this.descChange.bind(this);
+      this.allDayChange = this.allDayChange.bind(this);
+      this.dateChange = this.dateChange.bind(this);
+      this.isBusyChange = this.isBusyChange.bind(this);
+      this.addEvent = this.addEvent.bind(this);
+  }
+  
+  textChange(event) {
+      var state = this.state;
+      state.eventText = event.target.value;
+      this.setState(state);
+  }
+  
+  descChange(event) {
+      var state = this.state;
+      state.eventDesc = event.target.value;
+      this.setState(state);
+  }
+  
+  allDayChange(event) {
+      var state = this.state;
+      state.allDay = event.target.checked;
+      this.refs.range.instance.option({
+          controls: state.allDay ? ['date'] : ['date', 'time'],
+          dateWheels: state.allDay ? 'MM dd yy' : '|D M d|'
+      });
+      
+      this.refs.range.instance.setVal(this.refs.range.instance.getVal(), true, false);
+      this.setState(state);
+  }
+  
+  dateChange(event, inst) {
+      var state = this.state;
+      state.eventDate = inst.getVal();
+      this.setState(state);
+  }
+  
+  isBusyChange(event){
+      var state = this.state;
+      state.isBusy = event.target.value;
+      this.setState(state);
+  }
+  
+  addEvent(event, inst) {
+      var changedState = this.state;
+      changedState.myEvents = changedState.myEvents.concat([{
+          start: this.state.eventDate[0],
+          end: this.state.eventDate[1],
+          text: this.state.eventText || 'New Event',
+          allDay: this.state.allDay
+      }]);
+      changedState.eventText = '';
+      changedState.eventDesc = '';
+      this.setState(changedState);
+      this.refs.eventCal.instance.setVal(this.state.eventDate[0]);
+  }
+  
+  render () {
+      return (
+          <div>
+              <div className="mbsc-grid-fixed mbsc-grid-md">
+                    <mobiscroll.Eventcalendar
+                        theme="24-hour-cal"
+                        display="inline"
+                        data={this.state.myEvents}
+                        view={{
+                            calendar: { type: 'week' },
+                            eventList: { type: 'week' }
+                        }}
+                    />
+                </div>
+
+              <mobiscroll.Form className="mbsc-grid-fixed mbsc-grid-md">
+                  <mobiscroll.FormGroup>
+                      <mobiscroll.FormGroupTitle>Add New event</mobiscroll.FormGroupTitle>
+                      <mobiscroll.Form.Label>
+                          Type Name
+                          <input value={this.state.eventText} onChange={this.textChange} />
+                      </mobiscroll.Form.Label>
+                      <mobiscroll.Textarea value={this.state.eventDesc} onChange={this.descChange}>
+                          Event Name
+                      </mobiscroll.Textarea>
+                  </mobiscroll.FormGroup>
+                  <mobiscroll.FormGroup>  
+                      {/* <mobiscroll.Switch value={this.state.allDay} onChange={this.allDayChange}>
+                          All-day
+                      </mobiscroll.Switch> */}
+                          <mobiscroll.Form.Label>
+                              Starts
+                              <input id="startDate" />
+                          </mobiscroll.Form.Label>
+                          <mobiscroll.Form.Label>
+                              Ends
+                              <input id="endDate" />
+                          </mobiscroll.Form.Label>
+                          <mobiscroll.Form.Label>
+                              Time Duration
+                              <input id="timeDuration" />
+                          </mobiscroll.Form.Label>
+                          <mobiscroll.Form.Label>
+                              Days Out Of The Week
+                              <input id="days_out_of_the_week" />
+                          </mobiscroll.Form.Label>
+                          {/* <mobiscroll.Range
+                              theme="ios"                 // Specify theme like: theme="ios" or omit setting to use default
+                              lang="en"                   // Specify language like: lang="pl" or omit setting to use default
+                              ref="range"
+                              type="hidden"
+                              controls={['date', 'time']}
+                              dateWheels="|D M d|"
+                              startInput="#startDate"
+                              endInput="#endDate"
+                              tabs={false}
+                              value={this.state.eventDate}
+                              onSet={this.dateChange}
+                          /> */}
+                  </mobiscroll.FormGroup>
+                  <mobiscroll.FormGroup className="mbsc-btn-group-block">
+                      <button onClick={this.addEvent} type="button">Add Event</button>
+                  </mobiscroll.FormGroup>
+              </mobiscroll.Form>
+          </div>
+      );
+  }    
+}
+export default NewEvent;

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import NewEventButton from './NewEventButton';
 
 /* import Mobiscroll JS and CSS */
 import mobiscroll from '@mobiscroll/react';
 import '@mobiscroll/react/dist/css/mobiscroll.react.min.css';
+import DeleteEventButton from './DeleteEventButton';
 
 class MonthlyView extends React.Component {
     constructor(props) {
@@ -147,6 +149,7 @@ class MonthlyView extends React.Component {
         return (
             <div>
                 <div className="mbsc-grid-fixed mbsc-grid-md">
+                <NewEventButton /> <DeleteEventButton />
                     <mobiscroll.Eventcalendar
                         theme="24-hour-cal"
                         display="inline"
