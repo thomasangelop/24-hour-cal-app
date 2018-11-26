@@ -154,18 +154,21 @@ class PreferencesPage extends React.Component {
 
   handleCloseSave = (id) => {
     this.setState({ open: false });
-    // axios({
-    //   method: 'PUT',
-    //   url: `api/editsave/${id}`
-    // })
-    // .then( (response) => {
-    //   this.getPreferences();
-    //   console.log(`edited pref id: ${id} successfully`);
-    // })
-    // .catch( (error) => {
-    //   console.log(`error editing pref id: ${id}`);
-    // })
-    // console.log('edit form was saved');
+    console.log('what is id?:', id);
+    
+    axios({
+      method: 'PUT',
+      url: `api/editsave/${id}`,
+      data: this.state,
+    })
+    .then( (response) => {
+      this.getPreferences();
+      console.log(`edited pref id: ${id} successfully`);
+    })
+    .catch( (error) => {
+      console.log(`error editing pref id: ${id}`);
+    })
+    console.log('edit form was saved');
 
   };
 
@@ -223,12 +226,12 @@ class PreferencesPage extends React.Component {
              {/* Edit button div below */}
              <div>
               <MuiThemeProvider theme={theme}>
-                <Button variant="contained" color="secondary" style={{ cursor: 'pointer' }} className={classes.button} onClick={() => this.handleClickOpen(preferences.id)}>
+                {/* <Button variant="contained" color="secondary" style={{ cursor: 'pointer' }} className={classes.button} onClick={() => this.handleClickOpen(preferences.id)}>
                     Edit
-                </Button>
+                </Button> */}
                 <Dialog
           open={this.state.open}
-          onClose={() => this.handleClose(preferences.id)}
+          onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
           <DialogTitle id="form-dialog-title">Edit Preference</DialogTitle>
@@ -273,7 +276,7 @@ class PreferencesPage extends React.Component {
             <Button onClick={this.handleCloseCancel} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.handleCloseSave} color="primary">
+            <Button onClick={() => this.handleCloseSave(preferences.id)} color="primary">
               Save
             </Button>
           </DialogActions>

@@ -9,12 +9,13 @@ router.put('/:id', (req, res) => {
     const pref = req.body;
     const sqlText = `
         UPDATE userpreferences 
-            SET person_id=$2,
-            type_name=$3,
-            time_duration=$4,
-            days_out_of_the_week=$5
-        WHERE id=$1`;
-    pool.query(sqlText, [reqId, pref.person_id, pref.type_name, pref.time_duration, pref.days_out_of_the_week])
+            SET person_id=$1,
+            type_name=$2,
+            time_duration=$3,
+            days_out_of_the_week=$4
+        WHERE id=$5
+        `;
+    pool.query(sqlText, [pref.person_id, pref.type_name, pref.time_duration, pref.days_out_of_the_week, reqId])
     .then((result) => {
         console.log(`Added to the database`, pref);
         res.sendStatus(201);
