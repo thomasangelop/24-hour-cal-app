@@ -27,18 +27,32 @@ class WeeklyView extends React.Component {
     
     // when the page loads run this database call
     componentDidMount() {
-      this.getPreferences();
+      this.getEvent();
     }
     //get the preferences from the database
-    getPreferences = () => {
+    getEvent = () => {
      //Dispatch action to get the preferences from the server
      //This is picked up by the watcherSaga in index.js
      this.props.dispatch( { type: 'FETCH_EVENT', payload: this.state} );
+     this.setState({
+
+     })
     }
         
     render() {
         return (
             <div>
+                <pre>{JSON.stringify(this.props.reduxState.event)}</pre>
+                events: [
+                {this.props.reduxState.event.map(events => (
+                    <p key={events.id}>
+                        start: new Date('{events.start_date}'),
+                        end: new Date('{events.end_date}'),
+                        text: '{events.event_name}',
+                        color: '#ffffff'
+                    </p>
+                ))}
+                ]
                 <div className="mbsc-grid-fixed mbsc-grid-md">
                 <NewEventButton /><DeleteEventButton />
                     <mobiscroll.Eventcalendar
