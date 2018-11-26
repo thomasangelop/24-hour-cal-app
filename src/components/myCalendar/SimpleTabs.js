@@ -7,7 +7,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import MonthlyView from './MonthlyView';
 import WeeklyView from './WeeklyView';
-import NewEvent from './NewEvent';
+// import NewEvent from './NewEvent';
 
 function TabContainer(props) {
   return (

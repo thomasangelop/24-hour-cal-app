@@ -15,6 +15,7 @@ const newPrefRouter = require('./routes/newPref.router');
 const deletePref = require('./routes/deletePref.router');
 const editGetPref = require('./routes/editGetPref.router');
 const editSave = require('./routes/editSave.router');
+const eventRouter = require('./routes/event.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -34,6 +35,7 @@ app.use('/api/newPref', newPrefRouter);
 app.use('/api/delete', deletePref);
 app.use('/api/editget', editGetPref);
 app.use('/api/editsave', editSave);
+app.use('/api/event', eventRouter);
 
 
 // Serve static files
