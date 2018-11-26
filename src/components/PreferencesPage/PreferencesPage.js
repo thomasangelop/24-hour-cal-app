@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import CreateNewP from './CreateNewP';
 import { connect } from 'react-redux';
+import Moment from 'moment';
 
 //import paper information from material ui
 import PropTypes from 'prop-types';
@@ -21,12 +22,6 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import InputAdornment from '@material-ui/core/InputAdornment';
-
-//checkbox inports
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-
 
 //setup redux state for global usage of information 
 const mapReduxStateToProps = reduxState => ({
@@ -82,7 +77,14 @@ class PreferencesPage extends React.Component {
     friday: false,
     saturday: false,
     sunday: false,
+    person_id: this.props.reduxState.user.id,
+    type_name: '',
+    // start_date: '',
+    // end_date: '',
+    time_duration: '',
+    days_out_of_the_week: '',
   }
+
   // when the page loads run this database call
   componentDidMount() {
     this.getPreferences();
@@ -103,16 +105,71 @@ class PreferencesPage extends React.Component {
   }
 
   //EDIT button functions: 
-  handleChange = name => event => {
-    this.setState({ [name]: event.target.checked });
+  handleChangePref = (event) => {
+    event.preventDefault();
+    this.setState({ [event.target.name]: event.target.value });    
   };
 
-  handleClickOpen = () => {
+  handleClickOpen = (id) => {
     this.setState({ open: true });
+    //EDIT button clicked, get userpreference.id
+    axios({
+      method: 'GET',
+      url: `api/editget/${id}`
+    })
+    .then( (response) => {
+      //what is the response? 
+      console.log('what is the response?:', response.data);
+      const editPref = response.data;
+      this.editGetPref(editPref);
+    })
+    .catch( (error) => {
+      console.log(`error getting id: ${id} data from pg`);
+    })
   };
 
-  handleClose = () => {
+  editGetPref = (editPref) => {
+    console.log('editGetPref is working', editPref);
+    editPref.map(preference => {
+      this.setState({
+        type_name: preference.type_name,
+        time_duration: preference.time_duration,
+        days_out_of_the_week: preference.days_out_of_the_week,
+      })
+    })
+    console.log('new state:', this.state);
+  }
+
+  handleCloseCancel = () => {
+    this.setState({ 
+      open: false,
+      type_name: '',
+      // start_date: '',
+      // end_date: '',
+      time_duration: '',
+      days_out_of_the_week: '',
+    });
+    console.log('edit form was canceled');
+  };
+
+  handleCloseSave = (id) => {
     this.setState({ open: false });
+    console.log('what is id?:', id);
+    
+    axios({
+      method: 'PUT',
+      url: `api/editsave/${id}`,
+      data: this.state,
+    })
+    .then( (response) => {
+      this.getPreferences();
+      console.log(`edited pref id: ${id} successfully`);
+    })
+    .catch( (error) => {
+      console.log(`error editing pref id: ${id}`);
+    })
+    console.log('edit form was saved');
+
   };
 
   //DELETE button funciton
@@ -127,7 +184,7 @@ class PreferencesPage extends React.Component {
       console.log(`deleted pref id: ${id} successfully`);
     })
     .catch( (error) => {
-      console.log(`error deleting project id: ${id}`);
+      console.log(`error deleting pref id: ${id}`);
     })
   }
 
@@ -150,12 +207,12 @@ class PreferencesPage extends React.Component {
              <Typography>
              Type Name: {preferences.type_name}
              </Typography>
-             <Typography>
+             {/* <Typography>
              Start Date: {preferences.start_date}
              </Typography>
              <Typography>
              End Date: {preferences.end_date}
-             </Typography>
+             </Typography> */}
              <Typography>
              Amount of Time in Hours: {preferences.time_duration.hours}
              </Typography>
@@ -169,161 +226,68 @@ class PreferencesPage extends React.Component {
              {/* Edit button div below */}
              <div>
               <MuiThemeProvider theme={theme}>
-                <Button variant="contained" color="secondary" style={{ cursor: 'pointer' }} className={classes.button} onClick={this.handleClickOpen}>
+                {/* <Button variant="contained" color="secondary" style={{ cursor: 'pointer' }} className={classes.button} onClick={() => this.handleClickOpen(preferences.id)}>
                     Edit
-                </Button>
+                </Button> */}
                 <Dialog
-                  open={this.state.open}
-                  onClose={this.handleClose}
-                  aria-labelledby="form-dialog-title"
-                >
-                  <DialogTitle id="form-dialog-title">Edit Preference</DialogTitle>
-                  <DialogContent>
-                    <DialogContentText>
-                      To edit a preference, please adjust your info here.
-                    </DialogContentText>
-                    <TextField
-                      autoFocus
-                      margin="dense"
-                      id="name"
-                      label="Preference Type Name"
-                      type="text"
-                      fullWidth
-                    />
-                    <br />
-                    <TextField
-                    id="datetime-local"
-                    label="Start Date"
-                    type="datetime-local"
-                    defaultValue="2018-11-24T12:30"
-                    className={classes.textField}
-                    InputLabelProps={{
-                    shrink: true,
-                    }}
-                    />
-                    <br />
-                    <TextField
-                    id="datetime-local"
-                    label="End Date"
-                    type="datetime-local"
-                    defaultValue="2018-11-24T12:30"
-                    className={classes.textField}
-                    InputLabelProps={{
-                    shrink: true,
-                    }}
-                    />
-                    <br />
-                    <TextField
-                      id="filled-adornment-weight"
-                      className={classes.textField}
-                      label="Duration (Hours)"
-                      InputProps={{
-                      endAdornment: (
-                        <InputAdornment variant="filled" position="end">
-                          Hours
-                        </InputAdornment>
-                      ),
-                      }}
-                      />
-                      <TextField
-                      id="filled-adornment-weight"
-                      className={classes.textField}
-                      label="Duration (Minutes)"
-                      InputProps={{
-                      endAdornment: (
-                        <InputAdornment variant="filled" position="end">
-                          Minutes
-                        </InputAdornment>
-                      ),
-                      }}
-                      />
-                      <br />
-                    <FormControlLabel
-                        control={
-                        <Checkbox
-                        checked={this.state.monday}
-                        onChange={this.handleChange('monday')}
-                        value="monday"
-                        indeterminate/>}
-                        label="Monday"
-                    />
-                    <br />
-                    <FormControlLabel
-                        control={
-                        <Checkbox
-                        checked={this.state.tuesday}
-                        onChange={this.handleChange('tuesday')}
-                        value="tuesday"
-                        indeterminate/>}
-                        label="Tuesday"
-                    />
-                    <br />
-                    <FormControlLabel
-                        control={
-                        <Checkbox
-                        checked={this.state.wednesday}
-                        onChange={this.handleChange('wednesday')}
-                        value="wednesday"
-                        indeterminate/>}
-                        label="Wednesday"
-                    />
-                    <br />
-                    <FormControlLabel
-                        control={
-                        <Checkbox
-                        checked={this.state.thursday}
-                        onChange={this.handleChange('thursday')}
-                        value="thursday"
-                        indeterminate/>}
-                        label="Thursday"
-                    />
-                    <br />
-                    <FormControlLabel
-                        control={
-                        <Checkbox
-                        checked={this.state.friday}
-                        onChange={this.handleChange('friday')}
-                        value="friday"
-                        indeterminate/>}
-                        label="Friday"
-                    />
-                    <br />
-                    <FormControlLabel
-                        control={
-                        <Checkbox
-                        checked={this.state.saturday}
-                        onChange={this.handleChange('saturday')}
-                        value="saturday"
-                        indeterminate/>}
-                        label="Saturday"
-                    />
-                    <br />
-                    <FormControlLabel
-                        control={
-                        <Checkbox
-                        checked={this.state.sunday}
-                        onChange={this.handleChange('sunday')}
-                        value="sunday"
-                        indeterminate/>}
-                        label="Sunday"
-                    />
-                  </DialogContent>
-                  <DialogActions>
-                    <Button onClick={this.handleClose} color="primary">
-                      Cancel
-                    </Button>
-                    <Button onClick={this.handleClose} color="primary">
-                      Save
-                    </Button>
-                  </DialogActions>
-                </Dialog>
+          open={this.state.open}
+          onClose={this.handleClose}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogTitle id="form-dialog-title">Edit Preference</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              To edit a preference, please adjust your info here.
+            </DialogContentText>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              label="Preference Type Name"
+              type="text"
+              fullWidth
+              name='type_name'
+              value={this.state.type_name}
+              onChange={this.handleChangePref}
+            />
+             <br />
+             <TextField
+              id="filled-adornment-weight"
+              className={classes.textField}
+              label="Duration (Ex: '2 hours' or '20 minutes' or '2 hours, 20 minutes)"
+              name="time_duration"
+              value={this.state.time_duration}
+              onChange={this.handleChangePref}
+              />
+              <br />
+              <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              label="Days Out of the Week (Ex: 'M, W, T, F' or 'M')"
+              type="text"
+              fullWidth
+              name='days_out_of_the_week'
+              value={this.state.days_out_of_the_week}
+              onChange={this.handleChangePref}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleCloseCancel} color="primary">
+              Cancel
+            </Button>
+            <Button onClick={() => this.handleCloseSave(preferences.id)} color="primary">
+              Save
+            </Button>
+          </DialogActions>
+        </Dialog>
               </MuiThemeProvider>
               </div>
             {/* Delete button div below */}
             <div>
               <MuiThemeProvider theme={theme}>
                 <IconButton className={classes.button} aria-label="Delete" onClick={() => this.handleRemove(preferences.id)}>
-                <DeleteIcon />
+                  <DeleteIcon />
                 </IconButton>
               </MuiThemeProvider>
             </div>

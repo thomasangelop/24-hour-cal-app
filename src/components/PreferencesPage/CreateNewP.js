@@ -13,7 +13,6 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import InputAdornment from '@material-ui/core/InputAdornment';
 
 //checkbox inports
 // import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -62,8 +61,8 @@ class CreateNewP extends React.Component {
       sunday: false,
       person_id: this.props.reduxState.user.id,
       type_name: '',
-      start_date: '',
-      end_date: '',
+      // start_date: '',
+      // end_date: '',
       time_duration: '',
       days_out_of_the_week: '',
   };
@@ -71,6 +70,7 @@ class CreateNewP extends React.Component {
   getPreferences = () => {
     //Dispatch action to get the preferences from the server
     //This is picked up by the watcherSaga in index.js
+    console.log('getting new prefs');
     this.props.dispatch( { type: 'FETCH_PREF', payload: this.state} );
   }
 
@@ -99,8 +99,8 @@ class CreateNewP extends React.Component {
     //clear state
     this.setState({
       type_name: '',
-      start_date:'',
-      end_date:'',
+      // start_date:'',
+      // end_date:'',
       time_duration:'',
       days_out_of_the_week:''
     })
@@ -138,151 +138,27 @@ class CreateNewP extends React.Component {
               value={this.state.type_name}
               onChange={this.handleChangePref}
             />
-            <br />
-            <TextField
-            //  id="datetime-local"
-             label="Start Date"
-             type="datetime-local"
-             defaultValue="2018-12-19 13:23:54+02"
-             className={classes.textField}
-             InputLabelProps={{
-             shrink: true,
-             }}
-             name="start_date"
-             value={this.state.start_date}
-             onChange={this.handleChangePref}
-             />
-             <br />
-             <TextField
-            //  id="datetime-local"
-             label="End Date"
-             type="datetime-local"
-             defaultValue="2018-12-19 13:23:54+02"
-             className={classes.textField}
-             InputLabelProps={{
-             shrink: true,
-             }}
-             name="end_date"
-             value={this.state.end_date}
-             onChange={this.handleChangePref}
-             />
              <br />
              <TextField
               id="filled-adornment-weight"
               className={classes.textField}
-              label="Duration (Hours)"
-              InputProps={{
-              endAdornment: (
-                <InputAdornment variant="filled" position="end">
-                  Hours
-                </InputAdornment>
-              ),
-              }}
-              name="time_duration"
-              value={this.state.time_duration}
-              onChange={this.handleChangePref}
-              />
-              <TextField
-              id="filled-adornment-weight"
-              className={classes.textField}
-              label="Duration (Minutes)"
-              InputProps={{
-              endAdornment: (
-                <InputAdornment variant="filled" position="end">
-                  Minutes
-                </InputAdornment>
-              ),
-              }}
+              label="Duration (Ex: '2 hours' or '20 minutes' or '2 hours, 20 minutes)"
               name="time_duration"
               value={this.state.time_duration}
               onChange={this.handleChangePref}
               />
               <br />
-
               <TextField
               autoFocus
               margin="dense"
               id="name"
-              label="Days Out of the Week"
+              label="Days Out of the Week (Ex: 'M, W, T, F' or 'M')"
               type="text"
               fullWidth
               name='days_out_of_the_week'
               value={this.state.days_out_of_the_week}
               onChange={this.handleChangePref}
             />
-              {/* checkboxes for days of the week */}
-              <div>
-             {/* <FormControlLabel
-                control={
-                <Checkbox
-                checked={this.state.monday}
-                //  onChange={this.handleChange('monday')}
-                 value="monday"
-                 indeterminate/>}
-                label="Monday"
-                onChange={this.handleChangePref}
-             />
-             <br />
-             <FormControlLabel
-                control={
-                <Checkbox
-                checked={this.state.tuesday}
-                 onChange={this.handleChange('tuesday')}
-                 value="tuesday"
-                 indeterminate/>}
-                label="Tuesday"
-             />
-             <br />
-             <FormControlLabel
-                control={
-                <Checkbox
-                checked={this.state.wednesday}
-                 onChange={this.handleChange('wednesday')}
-                 value="wednesday"
-                 indeterminate/>}
-                label="Wednesday"
-             />
-             <br />
-             <FormControlLabel
-                control={
-                <Checkbox
-                checked={this.state.thursday}
-                 onChange={this.handleChange('thursday')}
-                 value="thursday"
-                 indeterminate/>}
-                label="Thursday"
-             />
-             <br />
-             <FormControlLabel
-                control={
-                <Checkbox
-                checked={this.state.friday}
-                 onChange={this.handleChange('friday')}
-                 value="friday"
-                 indeterminate/>}
-                label="Friday"
-             />
-             <br />
-             <FormControlLabel
-                control={
-                <Checkbox
-                checked={this.state.saturday}
-                 onChange={this.handleChange('saturday')}
-                 value="saturday"
-                 indeterminate/>}
-                label="Saturday"
-             />
-             <br />
-             <FormControlLabel
-                control={
-                <Checkbox
-                checked={this.state.sunday}
-                 onChange={this.handleChange('sunday')}
-                 value="sunday"
-                 indeterminate/>}
-                label="Sunday"
-             /> */}
-             </div>
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleCloseCancel} color="primary">
