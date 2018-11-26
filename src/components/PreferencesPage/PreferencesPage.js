@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import CreateNewP from './CreateNewP';
 import { connect } from 'react-redux';
-import Moment from 'moment';
+// import Moment from 'moment';
 
 //import paper information from material ui
 import PropTypes from 'prop-types';

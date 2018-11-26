@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 // import LogOutButton from '../LogOutButton/LogOutButton';
+import Calendar from './Calendar.js';
 
 // this could also be written with destructuring parameters as:
 // const myCalendar = ({ user }) => (
@@ -13,6 +14,7 @@ const myCalendar = (props) => (
     <p>Your ID is: {props.user.id}</p>
     <LogOutButton className="log-in" /> */}
     <h1>My Calendar</h1>
+    <Calendar />
   </div>
 );
 
