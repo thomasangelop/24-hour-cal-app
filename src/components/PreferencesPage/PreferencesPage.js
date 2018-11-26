@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import CreateNewP from './CreateNewP';
 import { connect } from 'react-redux';
+import Moment from 'moment';
 
 //import paper information from material ui
 import PropTypes from 'prop-types';
@@ -21,12 +22,6 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import InputAdornment from '@material-ui/core/InputAdornment';
-
-//checkbox inports
-// import FormControlLabel from '@material-ui/core/FormControlLabel';
-// import Checkbox from '@material-ui/core/Checkbox';
-
 
 //setup redux state for global usage of information 
 const mapReduxStateToProps = reduxState => ({
@@ -84,8 +79,8 @@ class PreferencesPage extends React.Component {
     sunday: false,
     person_id: this.props.reduxState.user.id,
     type_name: '',
-    start_date: '',
-    end_date: '',
+    // start_date: '',
+    // end_date: '',
     time_duration: '',
     days_out_of_the_week: '',
   }
@@ -139,8 +134,10 @@ class PreferencesPage extends React.Component {
     editPref.map(preference => {
       this.setState({
         type_name: preference.type_name,
-        start_date: preference.start_date,
-        end_date: preference.end_date,
+        // start_date: Moment(preference.start_date),
+        // end_date: Moment(preference.end_date),
+        // start_date: moment(preference.start_date).format(“MM DD YYYY, hh:mm a”),
+        // end_date: moment(preference.end_date).format(“MM DD YYYY, hh:mm a”),
         time_duration: preference.time_duration,
         days_out_of_the_week: preference.days_out_of_the_week,
       })
@@ -163,8 +160,8 @@ class PreferencesPage extends React.Component {
     this.setState({ 
       open: false,
       type_name: '',
-      start_date: '',
-      end_date: '',
+      // start_date: '',
+      // end_date: '',
       time_duration: '',
       days_out_of_the_week: '',
     });
@@ -211,12 +208,12 @@ class PreferencesPage extends React.Component {
              <Typography>
              Type Name: {preferences.type_name}
              </Typography>
-             <Typography>
+             {/* <Typography>
              Start Date: {preferences.start_date}
              </Typography>
              <Typography>
              End Date: {preferences.end_date}
-             </Typography>
+             </Typography> */}
              <Typography>
              Amount of Time in Hours: {preferences.time_duration.hours}
              </Typography>
@@ -254,151 +251,27 @@ class PreferencesPage extends React.Component {
               value={this.state.type_name}
               onChange={this.handleChangePref}
             />
-            <br />
-            <TextField
-            //  id="datetime-local"
-             label="Start Date"
-             type="datetime-local"
-             defaultValue="2018-12-19 13:23:54+02"
-             className={classes.textField}
-             InputLabelProps={{
-             shrink: true,
-             }}
-             name="start_date"
-             value={this.state.start_date}
-             onChange={this.handleChangePref}
-             />
-             <br />
-             <TextField
-            //  id="datetime-local"
-             label="End Date"
-             type="datetime-local"
-             defaultValue="2018-12-19 13:23:54+02"
-             className={classes.textField}
-             InputLabelProps={{
-             shrink: true,
-             }}
-             name="end_date"
-             value={this.state.end_date}
-             onChange={this.handleChangePref}
-             />
              <br />
              <TextField
               id="filled-adornment-weight"
               className={classes.textField}
-              label="Duration (Hours)"
-              InputProps={{
-              endAdornment: (
-                <InputAdornment variant="filled" position="end">
-                  Hours
-                </InputAdornment>
-              ),
-              }}
+              label="Duration (Ex: '2 hours' or '20 minutes' or '2 hours, 20 minutes)"
               name="time_duration"
-              value={this.state.time_duration.hours}
-              onChange={this.handleChangePref}
-              />
-              <TextField
-              id="filled-adornment-weight"
-              className={classes.textField}
-              label="Duration (Minutes)"
-              InputProps={{
-              endAdornment: (
-                <InputAdornment variant="filled" position="end">
-                  Minutes
-                </InputAdornment>
-              ),
-              }}
-              name="time_duration"
-              value={this.state.time_duration.minutes}
+              value={this.state.time_duration}
               onChange={this.handleChangePref}
               />
               <br />
-
               <TextField
               autoFocus
               margin="dense"
               id="name"
-              label="Days Out of the Week"
+              label="Days Out of the Week (Ex: 'M, W, T, F' or 'M')"
               type="text"
               fullWidth
               name='days_out_of_the_week'
               value={this.state.days_out_of_the_week}
               onChange={this.handleChangePref}
             />
-              {/* checkboxes for days of the week */}
-              <div>
-             {/* <FormControlLabel
-                control={
-                <Checkbox
-                checked={this.state.monday}
-                //  onChange={this.handleChange('monday')}
-                 value="monday"
-                 indeterminate/>}
-                label="Monday"
-                onChange={this.handleChangePref}
-             />
-             <br />
-             <FormControlLabel
-                control={
-                <Checkbox
-                checked={this.state.tuesday}
-                 onChange={this.handleChange('tuesday')}
-                 value="tuesday"
-                 indeterminate/>}
-                label="Tuesday"
-             />
-             <br />
-             <FormControlLabel
-                control={
-                <Checkbox
-                checked={this.state.wednesday}
-                 onChange={this.handleChange('wednesday')}
-                 value="wednesday"
-                 indeterminate/>}
-                label="Wednesday"
-             />
-             <br />
-             <FormControlLabel
-                control={
-                <Checkbox
-                checked={this.state.thursday}
-                 onChange={this.handleChange('thursday')}
-                 value="thursday"
-                 indeterminate/>}
-                label="Thursday"
-             />
-             <br />
-             <FormControlLabel
-                control={
-                <Checkbox
-                checked={this.state.friday}
-                 onChange={this.handleChange('friday')}
-                 value="friday"
-                 indeterminate/>}
-                label="Friday"
-             />
-             <br />
-             <FormControlLabel
-                control={
-                <Checkbox
-                checked={this.state.saturday}
-                 onChange={this.handleChange('saturday')}
-                 value="saturday"
-                 indeterminate/>}
-                label="Saturday"
-             />
-             <br />
-             <FormControlLabel
-                control={
-                <Checkbox
-                checked={this.state.sunday}
-                 onChange={this.handleChange('sunday')}
-                 value="sunday"
-                 indeterminate/>}
-                label="Sunday"
-             /> */}
-             </div>
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleCloseCancel} color="primary">
@@ -415,7 +288,7 @@ class PreferencesPage extends React.Component {
             <div>
               <MuiThemeProvider theme={theme}>
                 <IconButton className={classes.button} aria-label="Delete" onClick={() => this.handleRemove(preferences.id)}>
-                <DeleteIcon />
+                  <DeleteIcon />
                 </IconButton>
               </MuiThemeProvider>
             </div>
