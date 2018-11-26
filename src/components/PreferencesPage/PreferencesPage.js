@@ -125,7 +125,6 @@ class PreferencesPage extends React.Component {
     })
     .catch( (error) => {
       console.log(`error getting id: ${id} data from pg`);
-      
     })
   };
 
@@ -134,26 +133,11 @@ class PreferencesPage extends React.Component {
     editPref.map(preference => {
       this.setState({
         type_name: preference.type_name,
-        // start_date: Moment(preference.start_date),
-        // end_date: Moment(preference.end_date),
-        // start_date: moment(preference.start_date).format(“MM DD YYYY, hh:mm a”),
-        // end_date: moment(preference.end_date).format(“MM DD YYYY, hh:mm a”),
         time_duration: preference.time_duration,
         days_out_of_the_week: preference.days_out_of_the_week,
       })
-      // <p key={preference.id}>
-      
-      // </p>
     })
-     // this.setState({ 
-      //   type_name: '',
-      //   start_date: '',
-      //   end_date: '',
-      //   time_duration: '',
-      //   days_out_of_the_week: '',
-      // })
     console.log('new state:', this.state);
-      
   }
 
   handleCloseCancel = () => {
@@ -168,9 +152,21 @@ class PreferencesPage extends React.Component {
     console.log('edit form was canceled');
   };
 
-  handleCloseSave = () => {
+  handleCloseSave = (id) => {
     this.setState({ open: false });
-    console.log('edit form was saved');
+    // axios({
+    //   method: 'PUT',
+    //   url: `api/editsave/${id}`
+    // })
+    // .then( (response) => {
+    //   this.getPreferences();
+    //   console.log(`edited pref id: ${id} successfully`);
+    // })
+    // .catch( (error) => {
+    //   console.log(`error editing pref id: ${id}`);
+    // })
+    // console.log('edit form was saved');
+
   };
 
   //DELETE button funciton
@@ -185,7 +181,7 @@ class PreferencesPage extends React.Component {
       console.log(`deleted pref id: ${id} successfully`);
     })
     .catch( (error) => {
-      console.log(`error deleting project id: ${id}`);
+      console.log(`error deleting pref id: ${id}`);
     })
   }
 
@@ -232,7 +228,7 @@ class PreferencesPage extends React.Component {
                 </Button>
                 <Dialog
           open={this.state.open}
-          onClose={this.handleClose}
+          onClose={() => this.handleClose(preferences.id)}
           aria-labelledby="form-dialog-title"
         >
           <DialogTitle id="form-dialog-title">Edit Preference</DialogTitle>
