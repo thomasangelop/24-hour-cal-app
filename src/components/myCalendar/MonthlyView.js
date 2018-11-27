@@ -115,6 +115,12 @@ class MonthlyView extends React.Component {
                             <DialogContentText>
                             Location: {this.state.location}
                             </DialogContentText>
+                            <DialogContentText>
+                            Start Time: {this.state.start}
+                            </DialogContentText>
+                            <DialogContentText>
+                            End Time: {this.state.end}
+                            </DialogContentText>
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={this.handleCancel} color="primary">
