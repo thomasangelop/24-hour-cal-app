@@ -1,10 +1,15 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import NewEventButton from './NewEventButton';
 
 /* import Mobiscroll JS and CSS */
 import mobiscroll from '@mobiscroll/react';
 import '@mobiscroll/react/dist/css/mobiscroll.react.min.css';
-import DeleteEventButton from './DeleteEventButton';
+
+//setup redux state for global usage of information 
+const mapReduxStateToProps = reduxState => ({
+    reduxState
+  });
 
 class MonthlyView extends React.Component {
     state = {
@@ -17,15 +22,27 @@ class MonthlyView extends React.Component {
             }, 
         ]
     };
+
+     // when the page loads run this database call
+     componentDidMount() {
+        this.getEvent();
+      }
+      //get the preferences from the database
+      getEvent = () => {
+       //Dispatch action to get the preferences from the server
+       //This is picked up by the watcherSaga in index.js
+       this.props.dispatch( { type: 'FETCH_EVENT', payload: this.state} );
+      }
+
     render() {
         return (
             <div>
                 <div className="mbsc-grid-fixed mbsc-grid-md">
-                <NewEventButton /> <DeleteEventButton />
+                <NewEventButton />
                     <mobiscroll.Eventcalendar
                         theme="24-hour-cal"
                         display="inline"
-                        data={this.state.events}
+                        data={this.props.reduxState.event}
                         view={{
                             calendar: { type: 'month' },
                             eventList: { type: 'month' }
@@ -36,4 +53,4 @@ class MonthlyView extends React.Component {
         );
     }        
 }
-export default MonthlyView;
+export default connect(mapReduxStateToProps)(MonthlyView);

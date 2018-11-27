@@ -17,6 +17,8 @@ const editGetPref = require('./routes/editGetPref.router');
 const editSave = require('./routes/editSave.router');
 const eventRouter = require('./routes/event.router');
 const newOneTimeEvent = require('./routes/newOneTimeEvent.router');
+const deleteEvent = require('./routes/deleteEvent.router');
+
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -38,6 +40,8 @@ app.use('/api/editget', editGetPref);
 app.use('/api/editsave', editSave);
 app.use('/api/event', eventRouter);
 app.use('/api/newOneTimeEvent', newOneTimeEvent);
+app.use('/api/deleteevent', deleteEvent);
+
 
 
 

@@ -40,21 +40,10 @@ const theme = createMuiTheme({
 });
 
 class DeleteEventButton extends React.Component {
-  state = {}
-
-  handleCloseCancel = () => {
-    console.log('edit form was canceled');
-  };
-
-  handleCloseSave = (id) => {
-    this.setState({ open: false });
-    console.log('what is id?:', id);
-
-  };
-
   //DELETE button funciton
-  handleRemove = (id) => {
-    console.log('deleting pref id:', id);
+  handleRemove = () => {
+    console.log('deleting pref id');
+    this.props.dispatch( { type: 'FETCH_DELETE_EVENT', payload: this.state} );
     // axios({
     //   method: 'DELETE',
     //   url: `/api/delete/${id}`

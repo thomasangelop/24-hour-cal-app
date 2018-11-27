@@ -5,7 +5,6 @@ import NewEventButton from './NewEventButton';
 /* import Mobiscroll JS and CSS */
 import mobiscroll from '@mobiscroll/react';
 import '@mobiscroll/react/dist/css/mobiscroll.react.min.css';
-import DeleteEventButton from './DeleteEventButton';
 
 //setup redux state for global usage of information 
 const mapReduxStateToProps = reduxState => ({
@@ -51,7 +50,7 @@ class WeeklyView extends React.Component {
                 ))}
                 ] */}
                 <div className="mbsc-grid-fixed mbsc-grid-md">
-                <NewEventButton /><DeleteEventButton />
+                <NewEventButton />
                     <mobiscroll.Eventcalendar
                         theme="24-hour-cal"
                         display="inline"
