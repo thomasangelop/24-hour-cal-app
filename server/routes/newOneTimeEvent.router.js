@@ -7,10 +7,13 @@ router.post('/', (req, res) => {
     const events = req.body;
     console.log('what is events?:', events);
     const sqlText = `
-    INSERT INTO user1events (person_id, "start", "end", "text", "color") 
-    VALUES ($1, $2, $3, $4, $5)`;
+    INSERT INTO user1events (person_id, "title", "description", "location", "start", "end", "text", "color") 
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`;
     pool.query(sqlText, [
             `${events.person_id}`,
+            `${events.title}`,
+            `${events.description}`,
+            `${events.location}`,
             `${events.startYear}-${events.startMonth}-${events.startDay} 
             ${events.startHour}:${events.startMinute}:00-00 ${events.startAMPM}`, 
             `${events.endYear}-${events.endMonth}-${events.endDay} 
