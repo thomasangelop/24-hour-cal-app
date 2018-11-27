@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import NewEventButton from './NewEventButton';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
+import axios from 'axios';
+
 
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -10,6 +12,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import withMobileDialog from '@material-ui/core/withMobileDialog';
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
 
 /* import Mobiscroll JS and CSS */
 import mobiscroll from '@mobiscroll/react';
@@ -18,6 +22,18 @@ import '@mobiscroll/react/dist/css/mobiscroll.react.min.css';
 //setup redux state for global usage of information 
 const mapReduxStateToProps = reduxState => ({
     reduxState
+  });
+
+  const styles = theme => ({
+    root: {
+      flexGrow: 1,
+      maxWidth: 600,
+      padding: theme.spacing.unit * 2,
+      margin: theme.spacing.unit * 4,
+    },
+    icon: {
+      color: theme.palette.text.primary,
+    },
   });
 
 class WeeklyView extends React.Component {
@@ -84,9 +100,25 @@ class WeeklyView extends React.Component {
     handleSave = () => {
         this.setState({ open: false });
     };
+
+    handleRemove = (id) => {
+        console.log('deleting event', id);
+        axios({
+          method: 'DELETE',
+          url: `/api/deleteevent/${id}`
+        })
+        .then( (response) => {
+          this.getEvent();
+          console.log(`deleted event: ${id} successfully`);
+        })
+        .catch( (error) => {
+          console.log(`error deleting event: ${id}`);
+        });
+        this.setState({ open: false });
+      }
         
     render() {
-        const { fullScreen } = this.props;
+        const { fullScreen, classes } = this.props;
         return (
             <div>
                 <div className="mbsc-grid-fixed mbsc-grid-md">
@@ -118,6 +150,10 @@ class WeeklyView extends React.Component {
                             Location: {this.state.location}
                             </DialogContentText>
                         </DialogContent>
+                        <IconButton variant="contained" color="primary" aria-label="Delete" 
+                              onClick={() => this.handleRemove(this.state.id)}>
+                             <DeleteIcon />
+                        </IconButton> 
                         <DialogActions>
                             <Button onClick={this.handleCancel} color="primary">
                             Cancel
@@ -136,6 +172,7 @@ class WeeklyView extends React.Component {
 
 WeeklyView.propTypes = {
     fullScreen: PropTypes.bool.isRequired,
+    classes: PropTypes.object.isRequired,
   };
 
 export default withMobileDialog()(connect(mapReduxStateToProps)(WeeklyView));

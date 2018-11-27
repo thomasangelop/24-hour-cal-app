@@ -135,7 +135,7 @@ class NewEventButton extends React.Component {
       description:'',
       location:'',
       color:'ffffff'
-    })
+    });
     this.getEvent();
   };
 

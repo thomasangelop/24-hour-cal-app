@@ -7,7 +7,6 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import MonthlyView from './MonthlyView';
 import WeeklyView from './WeeklyView';
-import DeleteEvents from './DeleteEvents';
 
 function TabContainer(props) {
   return (
@@ -48,12 +47,10 @@ class SimpleTabs extends React.Component {
           <Tabs value={value} onChange={this.handleChange}>
             <Tab label="My Calendar: Weekly View" />
             <Tab label="My Calendar: Monthly View" />
-            <Tab label="My Calendar: Delete Events" />
           </Tabs>
         </AppBar>
         {value === 0 && <TabContainer><WeeklyView /></TabContainer>}
         {value === 1 && <TabContainer><MonthlyView /></TabContainer>}
-        {value === 2 && <TabContainer><DeleteEvents /></TabContainer>}
       </div>
     );
   }
