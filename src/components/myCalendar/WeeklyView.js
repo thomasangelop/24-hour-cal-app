@@ -34,31 +34,29 @@ class WeeklyView extends React.Component {
      //Dispatch action to get the preferences from the server
      //This is picked up by the watcherSaga in index.js
      this.props.dispatch( { type: 'FETCH_EVENT', payload: this.state} );
-     this.setState({
-
-     })
     }
         
     render() {
         return (
             <div>
-                <pre>{JSON.stringify(this.props.reduxState.event)}</pre>
+                {/* <pre>{JSON.stringify(this.props.reduxState.event)}</pre>
                 events: [
                 {this.props.reduxState.event.map(events => (
                     <p key={events.id}>
-                        start: new Date('{events.start_date}'),
-                        end: new Date('{events.end_date}'),
-                        text: '{events.event_name}',
-                        color: '#ffffff'
+                        start: new Date('{events.start}'),
+                        end: new Date('{events.end}'),
+                        text: '{events.text}',
+                        color: '#{events.color}'
                     </p>
                 ))}
-                ]
+                ] */}
                 <div className="mbsc-grid-fixed mbsc-grid-md">
                 <NewEventButton /><DeleteEventButton />
                     <mobiscroll.Eventcalendar
                         theme="24-hour-cal"
                         display="inline"
-                        data={this.state.events}
+                        // data={this.state.events}
+                        data={this.props.reduxState.event}
                         view={{
                             calendar: { type: 'week' },
                             eventList: { type: 'week' }

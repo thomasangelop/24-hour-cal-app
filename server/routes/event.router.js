@@ -3,7 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    const sqlText = `SELECT * FROM events WHERE person_id=${req.user.id};`;
+    const sqlText = `SELECT * FROM user1events;`;
     pool.query(sqlText)
         .then((result) => {
             console.log(`Got stuff back from the database`, result);
