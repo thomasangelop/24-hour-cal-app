@@ -3,7 +3,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 
 // worker Saga: will be fired on "FETCH_USER" actions
 function* setEventSaga() {
-  console.log('in pref saga');
+  console.log('in GET events, eventSaga');
   
   try {
     const config = {

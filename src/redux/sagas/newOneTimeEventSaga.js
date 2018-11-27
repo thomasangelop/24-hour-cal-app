@@ -9,7 +9,7 @@ function* newOneTimeEventSaga(action) {
     console.log('ran set_new_pref');
   } 
   catch (error) {
-    console.log('One time event GET request failed', error);
+    console.log('One time event POST request failed', error);
   }
 }
 

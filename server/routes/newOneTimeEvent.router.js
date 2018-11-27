@@ -2,22 +2,24 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-// Setup a POST route to add a new event to the database
+// Setup a POST route to add a new events to the database
 router.post('/', (req, res) => {
-    const event = req.body;
+    const events = req.body;
+    console.log('what is events?:', events);
     const sqlText = `
-    INSERT INTO user1events ("start", "end", "text", "color") 
-    VALUES ($1, $2, $3, $4)`;
+    INSERT INTO user1events (person_id, "start", "end", "text", "color") 
+    VALUES ($1, $2, $3, $4, $5)`;
     pool.query(sqlText, [
-            `${event.startYear}-${event.startMonth}-${event.startDay} 
-            ${event.startHour}:${event.startMinute}:00-00 ${event.startAMPM}`, 
-            `${event.endYear}-${event.endMonth}-${event.endDay} 
-            ${event.endHour}:${event.endMinute}:00-00 ${event.endAMPM}`,
-            `<div class="mbsc-bold">${event.title}</div> <div class="md-event-desc">${event.description}</div><div class="md-event-loc mbsc-txt-muted">
-            <span class="mbsc-ic mbsc-ic-location"></span>${event.location}</div>`,
-            `${event.color}`])
+            `${events.person_id}`,
+            `${events.startYear}-${events.startMonth}-${events.startDay} 
+            ${events.startHour}:${events.startMinute}:00-00 ${events.startAMPM}`, 
+            `${events.endYear}-${events.endMonth}-${events.endDay} 
+            ${events.endHour}:${events.endMinute}:00-00 ${events.endAMPM}`,
+            `<div class="mbsc-bold">${events.title}</div> <div class="md-events-desc">${events.description}</div><div class="md-events-loc mbsc-txt-muted">
+            <span class="mbsc-ic mbsc-ic-location"></span>${events.location}</div>`,
+            `${events.color}`])
         .then((result) => {
-            console.log(`Added to the database`, event);
+            console.log(`Added to the database`);
             res.sendStatus(201);
         })
         .catch((error) => {

@@ -67,6 +67,7 @@ class NewEventButton extends React.Component {
 
   state = {
       open: false,
+      person_id: this.props.reduxState.user.id,
       startMonth:'',
       startDay:'',
       startYear:'',
@@ -77,7 +78,7 @@ class NewEventButton extends React.Component {
       endDay:'',
       endYear:'',
       endHour:'',
-      endMinutes:'',
+      endMinute:'',
       endAMPM:'',
       title:'',
       description:'',
@@ -87,9 +88,9 @@ class NewEventButton extends React.Component {
 
   
 
-  //get the preferences from the database
+  //get the events from the database
   getEvent = () => {
-    //Dispatch action to get the preferences from the server
+    //Dispatch action to get the events from the server
     //This is picked up by the watcherSaga in index.js
     this.props.dispatch( { type: 'FETCH_EVENT', payload: this.state} );
    }
@@ -128,7 +129,7 @@ class NewEventButton extends React.Component {
       endDay:'',
       endYear:'',
       endHour:'',
-      endMinutes:'',
+      endMinute:'',
       endAMPM:'',
       title:'',
       description:'',
