@@ -34,6 +34,11 @@ class WeeklyView extends React.Component {
      //This is picked up by the watcherSaga in index.js
      this.props.dispatch( { type: 'FETCH_EVENT', payload: this.state} );
     }
+
+    onEventSelect = (event, inst) => {
+        console.log('an event was clicked. event:', event, 'inst:', inst);
+        
+    }
         
     render() {
         return (
@@ -60,6 +65,7 @@ class WeeklyView extends React.Component {
                             calendar: { type: 'week' },
                             eventList: { type: 'week' }
                         }}
+                        onEventSelect={this.onEventSelect}
                     />
                 </div>
             </div>
