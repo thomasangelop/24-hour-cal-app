@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import NewEventButton from './NewEventButton';
+import EditEventButton from './EditEventButton';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
@@ -12,8 +13,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import withMobileDialog from '@material-ui/core/withMobileDialog';
-import DeleteIcon from '@material-ui/icons/Delete';
-import IconButton from '@material-ui/core/IconButton';
+
 
 /* import Mobiscroll JS and CSS */
 import mobiscroll from '@mobiscroll/react';
@@ -116,11 +116,16 @@ class WeeklyView extends React.Component {
         });
         this.setState({ open: false });
       }
+
+      handleEdit = (id) => {
+          console.log('handle edit cliked for id:', id);
+          
+      }
         
     render() {
         const { fullScreen, classes } = this.props;
         return (
-            <div>
+            <div className={classes}>
                 <div className="mbsc-grid-fixed mbsc-grid-md">
                 <NewEventButton />
                     <mobiscroll.Eventcalendar
@@ -156,16 +161,18 @@ class WeeklyView extends React.Component {
                             End Time: {this.state.end}
                             </DialogContentText>
                         </DialogContent>
-                        <IconButton variant="contained" color="primary" aria-label="Delete" 
-                              onClick={() => this.handleRemove(this.state.id)}>
-                             <DeleteIcon />
-                        </IconButton> 
                         <DialogActions>
                             <Button onClick={this.handleCancel} color="primary">
-                            Cancel
+                                Cancel
                             </Button>
+                            <Button onClick={() => this.handleRemove(this.state.id)} color="primary">
+                                Delete
+                            </Button>
+                            {/* <Button onClick={this.handleCancel} color="primary"> */}
+                                <EditEventButton />
+                            {/* </Button> */}
                             <Button onClick={this.handleSave} color="primary" autoFocus>
-                            Save
+                                Save
                             </Button>
                         </DialogActions>
                         </Dialog>
