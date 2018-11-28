@@ -74,6 +74,10 @@ class CreateNewP extends React.Component {
     this.props.dispatch( { type: 'FETCH_PREF', payload: this.state} );
   }
 
+  componentDidMount = () => {
+    this.getPreferences();
+  }
+
   handleChangePref = (event) => {
     event.preventDefault();
     this.setState({ [event.target.name]: event.target.value });    

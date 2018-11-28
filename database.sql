@@ -16,16 +16,16 @@ CREATE TABLE "userpreferences" (
     "days_out_of_the_week" varchar (255)
 );
 
-CREATE TABLE "events" (
+CREATE TABLE "user1events" (
     "id" serial NOT NULL,
-    "person_id" int NOT NULL,
-    "type_name" varchar (255) NOT NULL,
-    "event_name" varchar (255) NOT NULL,
-    "start_date" timestamp with time zone,
-    "end_date" timestamp with time zone,
-    "time_duration" interval,
-    "days_out_of_the_week" varchar (255)
+	"person_id" int NOT NULL,
+	"pref_type_name" varchar (255),
+	"title" varchar (255) NOT NULL,
+	"description" varchar (255) NOT NULL,
+	"location" varchar (255) NOT NULL,
+    "start" timestamp with time zone NOT NULL,
+    "end" timestamp with time zone NOT NULL,
+    "text" varchar (255) NOT NULL,
+    "color" varchar (255) NOT NULL,
+	"days_out_of_the_week" varchar (255)
 );
-
-INSERT INTO userpreferences (person_id, type_name, start_date, end_date, time_duration, days_out_of_the_week) 
-VALUES (1, 'Fitness', '2004-10-19 10:23:54+02', '2004-10-19 13:23:54+02', '20 minutes', 'M, W, F');
