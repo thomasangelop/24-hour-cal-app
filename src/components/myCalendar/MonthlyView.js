@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import NewEventButton from './NewEventButton';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
+import axios from 'axios';
+
 
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -10,6 +12,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import withMobileDialog from '@material-ui/core/withMobileDialog';
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
 
 /* import Mobiscroll JS and CSS */
 import mobiscroll from '@mobiscroll/react';
@@ -22,6 +26,7 @@ const mapReduxStateToProps = reduxState => ({
 
 class MonthlyView extends React.Component {
     state = {
+        person_id: this.props.reduxState.user.id,
         events: [
             {
             start: new Date('2018-11-26 12:00:00-06'),
@@ -84,6 +89,22 @@ class MonthlyView extends React.Component {
             this.setState({ open: false });
         };
 
+        handleRemove = (id) => {
+            console.log('deleting event', id);
+            axios({
+              method: 'DELETE',
+              url: `/api/deleteevent/${id}`
+            })
+            .then( (response) => {
+              this.getEvent();
+              console.log(`deleted event: ${id} successfully`);
+            })
+            .catch( (error) => {
+              console.log(`error deleting event: ${id}`);
+            });
+            this.setState({ open: false });
+          }
+
     render() {
         const { fullScreen } = this.props;
         return (
@@ -122,6 +143,10 @@ class MonthlyView extends React.Component {
                             End Time: {this.state.end}
                             </DialogContentText>
                         </DialogContent>
+                        <IconButton variant="contained" color="primary" aria-label="Delete" 
+                              onClick={() => this.handleRemove(this.state.id)}>
+                             <DeleteIcon />
+                        </IconButton> 
                         <DialogActions>
                             <Button onClick={this.handleCancel} color="primary">
                             Cancel

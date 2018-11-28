@@ -86,7 +86,9 @@ class NewEventButton extends React.Component {
       color:'ffffff'
   };
 
-  
+  componentDidMount = () => {
+    this.getEvent();
+  }
 
   //get the events from the database
   getEvent = () => {
@@ -116,7 +118,7 @@ class NewEventButton extends React.Component {
       open: false,
     });
     console.log('create form was saved', this.state);
-    this.props.dispatch( {type: 'ADD_NEW_ONE_TIME_EVENT', payload: this.state})
+    this.props.dispatch( {type: 'ADD_NEW_ONE_TIME_EVENT', payload: this.state});
     //clear state
     this.setState({
       startMonth:'',
