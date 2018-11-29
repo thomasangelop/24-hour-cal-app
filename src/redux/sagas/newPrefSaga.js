@@ -1,11 +1,12 @@
 import axios from 'axios';
-import { call, takeLatest } from 'redux-saga/effects';
+import { call, takeLatest, put} from 'redux-saga/effects';
 
 // worker Saga: will be fired on "FETCH_USER" actions
 function* newPrefSaga(action) {
   console.log('in new pref saga');  
   try {
     yield call( axios.post, '/api/newPref', action.payload);
+    yield put( {type: 'FETCH_PREF'} );
     console.log('ran set_new_pref');
   } 
   catch (error) {
