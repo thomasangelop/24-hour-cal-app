@@ -18,6 +18,7 @@ const editSave = require('./routes/editSave.router');
 const eventRouter = require('./routes/event.router');
 const newOneTimeEvent = require('./routes/newOneTimeEvent.router');
 const deleteEvent = require('./routes/deleteEvent.router');
+const editEvent = require('./routes/editEvent.router');
 
 
 // Body parser middleware
@@ -41,6 +42,7 @@ app.use('/api/editsave', editSave);
 app.use('/api/event', eventRouter);
 app.use('/api/newOneTimeEvent', newOneTimeEvent);
 app.use('/api/deleteevent', deleteEvent);
+app.use('/api/editevent', editEvent)
 
 
 

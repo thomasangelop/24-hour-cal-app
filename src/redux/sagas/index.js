@@ -6,6 +6,7 @@ import prefSaga from './prefSaga';
 import newPrefSaga from './newPrefSaga';
 import eventSaga from './eventSaga';
 import newOneTimeEventSaga from './newOneTimeEventSaga';
+import editEventSaga from './editEventSaga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -23,5 +24,6 @@ export default function* rootSaga() {
     newPrefSaga(),
     eventSaga(),
     newOneTimeEventSaga(),
+    editEventSaga(),
   ]);
 }

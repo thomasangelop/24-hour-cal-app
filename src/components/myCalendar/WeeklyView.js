@@ -99,6 +99,7 @@ class WeeklyView extends React.Component {
     componentDidMount() {
       this.getEvent();
     }
+
     //get the preferences from the database
     getEvent = () => {
      //Dispatch action to get the preferences from the server
@@ -136,8 +137,31 @@ class WeeklyView extends React.Component {
         this.setState({ openClick: false });
     };
 
-    handleSave = () => {
+
+    handleEditDone = () => {
         this.setState({ openClick: false });
+        console.log('create form was saved', this.state);
+        this.props.dispatch( {type: 'EDIT_EVENT', payload: this.state});
+        //clear state
+        this.setState({
+        startMonth:'',
+        startDay:'',
+        startYear:'',
+        startHour:'',
+        startMinute:'',
+        startAMPM:'',
+        endMonth:'',
+        endDay:'',
+        endYear:'',
+        endHour:'',
+        endMinute:'',
+        endAMPM:'',
+        title:'',
+        description:'',
+        location:'',
+        color:'ffffff'
+        });
+        this.getEvent();
     };
 
     handleRemove = (id) => {
@@ -175,7 +199,7 @@ class WeeklyView extends React.Component {
           openEdit: false,
         });
         console.log('edit form was saved', this.state);
-        // this.props.dispatch( {type: 'ADD_NEW_ONE_TIME_EVENT', payload: this.state});
+        this.props.dispatch( {type: 'ADD_NEW_ONE_TIME_EVENT', payload: this.state});
         //clear state
         this.setState({
           startMonth:'',
@@ -588,7 +612,7 @@ class WeeklyView extends React.Component {
                                     </Dialog>
                                 </MuiThemeProvider>
                                 </div>
-                            <Button onClick={this.handleSave} color="primary" autoFocus>
+                            <Button onClick={this.handleEditDone} color="primary" autoFocus>
                                 Done
                             </Button>
                         </DialogActions>
