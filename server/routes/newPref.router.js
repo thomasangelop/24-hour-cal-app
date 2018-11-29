@@ -1,9 +1,10 @@
 const express = require('express');
 const pool = require('../modules/pool');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 const router = express.Router();
 
 // Setup a POST route to add a new pref to the database
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
     const pref = req.body;
     const sqlText = `INSERT INTO userpreferences (person_id, type_name, start_date, 
         end_date, time_duration, days_out_of_the_week) 

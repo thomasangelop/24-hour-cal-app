@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 const pool = require('../modules/pool.js');
 
 // Setup UPDATE to edit a specific pref
-router.put('/:id', (req, res) => {
+router.put('/:id', rejectUnauthenticated, (req, res) => {
     let reqId = req.params.id;
     console.log('Update request for id', reqId); 
     const pref = req.body;

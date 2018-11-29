@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 const pool = require('../modules/pool.js');
 
 // Setup GET to get a specific pref
-router.get('/:id', (req, res) => {
+router.get('/:id', rejectUnauthenticated, (req, res) => {
     let reqId = req.params.id;
     console.log('Edit request for id', reqId);
     let sqlText = 'SELECT * FROM userpreferences WHERE id=$1;';

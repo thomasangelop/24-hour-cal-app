@@ -1,9 +1,10 @@
 const express = require('express');
 const pool = require('../modules/pool');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 const router = express.Router();
 
 // Setup a put route to add a new events to the database
-router.put('/', (req, res) => {
+router.put('/', rejectUnauthenticated, (req, res) => {
     const events = req.body;
     console.log('what is events?:', events);
     const sqlText = `

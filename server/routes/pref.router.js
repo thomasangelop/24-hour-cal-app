@@ -1,8 +1,9 @@
 const express = require('express');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
     const sqlText = `SELECT * FROM userpreferences WHERE person_id=${req.user.id};`;
     pool.query(sqlText)
         .then((result) => {
