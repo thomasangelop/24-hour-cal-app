@@ -248,9 +248,9 @@ class WeeklyView extends React.Component {
                             </DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={this.handleCancel} color="primary">
+                            {/* <Button onClick={this.handleCancel} color="primary">
                                 Cancel
-                            </Button>
+                            </Button> */}
                             <Button onClick={() => this.handleRemove(this.state.id)} color="primary">
                                 Delete
                             </Button>
@@ -589,7 +589,7 @@ class WeeklyView extends React.Component {
                                 </MuiThemeProvider>
                                 </div>
                             <Button onClick={this.handleSave} color="primary" autoFocus>
-                                Save
+                                Done
                             </Button>
                         </DialogActions>
                         </Dialog>
