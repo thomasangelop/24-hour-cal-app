@@ -153,7 +153,9 @@ class WeeklyView extends React.Component {
         .catch( (error) => {
           console.log(`error deleting event: ${id}`);
         });
-        this.setState({ open: false });
+        this.setState({ 
+            openClick: false,
+          });
       }
 
       handleEdit = (id) => {
