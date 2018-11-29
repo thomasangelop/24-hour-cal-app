@@ -153,7 +153,7 @@ class NewEventButton extends React.Component {
         </Button>
         <Dialog
           open={this.state.open}
-          onClose={this.handleClose}
+          onClose={this.handleCloseSave}
           aria-labelledby="form-dialog-title"
         >
           <DialogTitle id="form-dialog-title">Create A New One Time Event</DialogTitle>
@@ -203,7 +203,7 @@ class NewEventButton extends React.Component {
               Enter Start Date and Time
               </DialogContentText>
               <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="age-native-simple">Month</InputLabel>
+              <InputLabel htmlFor="event-native-simple">Month</InputLabel>
               <Select
               native
               name="startMonth"
@@ -226,7 +226,7 @@ class NewEventButton extends React.Component {
               </Select>
               </FormControl>
               <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="age-native-simple">Day</InputLabel>
+              <InputLabel htmlFor="event-native-simple">Day</InputLabel>
               <Select
               native
               name="startDay"
@@ -268,7 +268,7 @@ class NewEventButton extends React.Component {
               </Select>
               </FormControl>
               <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="age-native-simple">Year</InputLabel>
+              <InputLabel htmlFor="event-native-simple">Year</InputLabel>
               <Select
               native
               name="startYear"
@@ -282,7 +282,7 @@ class NewEventButton extends React.Component {
               </FormControl>
               <br />
               <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="age-native-simple">Hour</InputLabel>
+              <InputLabel htmlFor="event-native-simple">Hour</InputLabel>
               <Select
               native
               name="startHour"
@@ -305,7 +305,7 @@ class NewEventButton extends React.Component {
               </Select>
               </FormControl>
               <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="age-native-simple">Minute</InputLabel>
+              <InputLabel htmlFor="event-native-simple">Minute</InputLabel>
               <Select
               native
               name="startMinute"
@@ -320,7 +320,7 @@ class NewEventButton extends React.Component {
               </Select>
               </FormControl>
               <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="age-native-simple">AM/PM</InputLabel>
+              <InputLabel htmlFor="event-native-simple">AM/PM</InputLabel>
               <Select
               native
               name="startAMPM"
@@ -339,7 +339,7 @@ class NewEventButton extends React.Component {
               Enter End Date and Time
               </DialogContentText>
               <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="age-native-simple">Month</InputLabel>
+              <InputLabel htmlFor="event-native-simple">Month</InputLabel>
               <Select
               native
               name="endMonth"
@@ -362,7 +362,7 @@ class NewEventButton extends React.Component {
               </Select>
               </FormControl>
               <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="age-native-simple">Day</InputLabel>
+              <InputLabel htmlFor="event-native-simple">Day</InputLabel>
               <Select
               native
               name="endDay"
@@ -404,7 +404,7 @@ class NewEventButton extends React.Component {
               </Select>
               </FormControl>
               <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="age-native-simple">Year</InputLabel>
+              <InputLabel htmlFor="event-native-simple">Year</InputLabel>
               <Select
               native
               name="endYear"
@@ -418,7 +418,7 @@ class NewEventButton extends React.Component {
               </FormControl>
               <br />
               <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="age-native-simple">Hour</InputLabel>
+              <InputLabel htmlFor="event-native-simple">Hour</InputLabel>
               <Select
               native
               name="endHour"
@@ -441,7 +441,7 @@ class NewEventButton extends React.Component {
               </Select>
               </FormControl>
               <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="age-native-simple">Minute</InputLabel>
+              <InputLabel htmlFor="event-native-simple">Minute</InputLabel>
               <Select
               native
               name="endMinute"
@@ -456,7 +456,7 @@ class NewEventButton extends React.Component {
               </Select>
               </FormControl>
               <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="age-native-simple">AM/PM</InputLabel>
+              <InputLabel htmlFor="event-native-simple">AM/PM</InputLabel>
               <Select
               native
               name="endAMPM"
