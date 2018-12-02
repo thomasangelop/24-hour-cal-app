@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import { withStyles } from '@material-ui/core/styles';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
 
 
 import TextField from '@material-ui/core/TextField';
@@ -23,6 +24,8 @@ import withMobileDialog from '@material-ui/core/withMobileDialog';
 /* import Mobiscroll JS and CSS */
 import mobiscroll from '@mobiscroll/react';
 import '@mobiscroll/react/dist/css/mobiscroll.react.min.css';
+
+const moment = require('moment');
 
 //setup redux state for global usage of information 
 const mapReduxStateToProps = reduxState => ({
@@ -56,6 +59,11 @@ const mapReduxStateToProps = reduxState => ({
       selectEmpty: {
         marginTop: theme.spacing.unit * 2,
       },
+      paper: {
+        ...theme.mixins.gutters(),
+        paddingTop: theme.spacing.unit * 2,
+        paddingBottom: theme.spacing.unit * 2,
+      },
   });
 
   const theme = createMuiTheme({
@@ -64,7 +72,7 @@ const mapReduxStateToProps = reduxState => ({
           main: '#d60e58',
         },
       secondary: {
-        main: '#6ec95c',
+        main: '#54a543',
       },
     },
   });
@@ -236,9 +244,10 @@ class WeeklyView extends React.Component {
         return (
             <div className={classes.styles}>
                 <div className="mbsc-grid-fixed mbsc-grid-md">
+                <Paper className={classes.paper} elevation={1}>
                 <NewEventButton onClose={() => this.showCalendar}/>
                     <mobiscroll.Eventcalendar
-                        theme="24-hour-cal"
+                        theme="windows"
                         display="inline"
                         // data={this.state.events}
                         data={this.props.reduxState.event}
@@ -249,6 +258,7 @@ class WeeklyView extends React.Component {
                         onEventSelect={this.onEventSelect}
                         ref="myCalendar"
                     />
+                    </Paper>
                     <div>
                         <Dialog
                         fullScreen={fullScreen}

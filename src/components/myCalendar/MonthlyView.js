@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import TextField from '@material-ui/core/TextField';
@@ -54,6 +55,11 @@ const mapReduxStateToProps = reduxState => ({
       selectEmpty: {
         marginTop: theme.spacing.unit * 2,
       },
+      paper: {
+        ...theme.mixins.gutters(),
+        paddingTop: theme.spacing.unit * 2,
+        paddingBottom: theme.spacing.unit * 2,
+      },
   });
 
   const theme = createMuiTheme({
@@ -62,7 +68,7 @@ const mapReduxStateToProps = reduxState => ({
           main: '#d60e58',
         },
       secondary: {
-        main: '#6ec95c',
+        main: '#54a543',
       },
     },
   });
@@ -209,16 +215,18 @@ class MonthlyView extends React.Component {
             <div>
                 <div className="mbsc-grid-fixed mbsc-grid-md">
                 <NewEventButton />
-                    <mobiscroll.Eventcalendar
-                        theme="24-hour-cal"
-                        display="inline"
-                        data={this.props.reduxState.event}
-                        view={{
-                            calendar: { type: 'month' },
-                            eventList: { type: 'month' }
-                        }}
-                        onEventSelect={this.onEventSelect}
-                    />
+                    <Paper className={classes.paper} elevation={1}>
+                        <mobiscroll.Eventcalendar
+                            theme="windows"
+                            display="inline"
+                            data={this.props.reduxState.event}
+                            view={{
+                                calendar: { type: 'month' },
+                                eventList: { type: 'month' }
+                            }}
+                            onEventSelect={this.onEventSelect}
+                        />
+                    </Paper>
                     <div>
                         <Dialog
                         fullScreen={fullScreen}

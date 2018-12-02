@@ -12,7 +12,7 @@ router.put('/', rejectUnauthenticated, (req, res) => {
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`;
     pool.query(sqlText, [
             `${events.id}`,
-            `${events.person_id}`,
+            `${req.user.id}`,
             `${events.title}`,
             `${events.description}`,
             `${events.location}`,

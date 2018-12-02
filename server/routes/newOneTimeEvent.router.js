@@ -11,7 +11,8 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     INSERT INTO user1events (person_id, "title", "description", "location", "start", "end", "text", "color") 
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`;
     pool.query(sqlText, [
-            `${events.person_id}`,
+            `${req.user.id}`,
+            // `${events.person_id}`,
             `${events.title}`,
             `${events.description}`,
             `${events.location}`,

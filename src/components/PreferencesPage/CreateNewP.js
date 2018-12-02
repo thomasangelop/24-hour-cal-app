@@ -38,15 +38,15 @@ const styles = theme => ({
 });
 
 const theme = createMuiTheme({
-    palette: {
-      primary: {
-          main: '#d60e58',
-        },
-      secondary: {
-        main: '#6ec95c',
+  palette: {
+    primary: {
+        main: '#d60e58',
       },
+    secondary: {
+      main: '#54a543',
     },
-  });
+  },
+});
 
 class CreateNewP extends React.Component {
 
