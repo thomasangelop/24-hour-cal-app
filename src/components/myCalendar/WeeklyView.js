@@ -290,9 +290,9 @@ class WeeklyView extends React.Component {
                             </Button>
                             <div className={classes.root}>
                                 <MuiThemeProvider theme={theme}>
-                                    <Button color="primary" onClick={this.handleEditOpen}>
+                                    {/* <Button color="primary" onClick={this.handleEditOpen}>
                                         Edit
-                                    </Button>
+                                    </Button> */}
                                     <Dialog
                                     open={this.state.openEdit}
                                     onClose={this.handleClose}

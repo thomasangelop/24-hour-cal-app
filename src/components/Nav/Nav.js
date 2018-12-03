@@ -31,15 +31,15 @@ const Nav = (props) => (
         {props.user.id ? 'My Calendar' : 'Login / Register'}
       </Link>
       {/* Always show this link since the about page is not protected */}
-      <Link className="nav-link" to="/about">
+      {/* <Link className="nav-link" to="/about">
         About 24 Hour Cal
-      </Link>
+      </Link> */}
       {/* Show the link to the preferences page and the logout button if the user is logged in */}
       {props.user.id && (
         <>
-          <Link className="nav-link" to="/preferences">
+          {/* <Link className="nav-link" to="/preferences">
             Preferences
-          </Link>
+          </Link> */}
           <LogOutButton className="nav-link"/>
         </>
       )}

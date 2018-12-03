@@ -253,9 +253,9 @@ class MonthlyView extends React.Component {
                             {/* <Button onClick={this.handleCancel} color="primary">
                                 Cancel
                             </Button> */}
-                            <Button onClick={() => this.handleRemove(this.state.id)} color="primary">
+                            {/* <Button onClick={() => this.handleRemove(this.state.id)} color="primary">
                                 Delete
-                            </Button>
+                            </Button> */}
                             <div className={classes.root}>
                                 <MuiThemeProvider theme={theme}>
                                     <Button color="primary" onClick={this.handleEditOpen}>

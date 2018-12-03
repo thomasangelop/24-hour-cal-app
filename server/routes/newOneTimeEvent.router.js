@@ -29,6 +29,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         })
         .catch((error) => {
             console.log(`Error making database query ${sqlText}`, error);
+            alert(`Error creating new event ${sqlText}`, error)
             res.sendStatus(500); // Good server always responds
         })
 })

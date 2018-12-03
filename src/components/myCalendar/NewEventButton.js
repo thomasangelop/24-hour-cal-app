@@ -163,6 +163,7 @@ class NewEventButton extends React.Component {
             </DialogContentText>
               <TextField
               autoFocus
+              required
               margin="dense"
               id="name"
               label="Title"
