@@ -217,7 +217,7 @@ class MonthlyView extends React.Component {
                 <NewEventButton />
                     <Paper className={classes.paper} elevation={1}>
                         <mobiscroll.Eventcalendar
-                            theme="windows"
+                            theme="24-hour-cal"
                             display="inline"
                             data={this.props.reduxState.event}
                             view={{

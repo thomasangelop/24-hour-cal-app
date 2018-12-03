@@ -247,7 +247,7 @@ class WeeklyView extends React.Component {
                 <Paper className={classes.paper} elevation={1}>
                 <NewEventButton onClose={() => this.showCalendar}/>
                     <mobiscroll.Eventcalendar
-                        theme="windows"
+                        theme="24-hour-cal"
                         display="inline"
                         // data={this.state.events}
                         data={this.props.reduxState.event}
