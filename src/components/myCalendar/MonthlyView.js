@@ -214,8 +214,8 @@ class MonthlyView extends React.Component {
         return (
             <div>
                 <div className="mbsc-grid-fixed mbsc-grid-md">
-                <NewEventButton />
                     <Paper className={classes.paper} elevation={1}>
+                    <NewEventButton />
                         <mobiscroll.Eventcalendar
                             theme="24-hour-cal"
                             display="inline"
