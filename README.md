@@ -13,7 +13,7 @@ This is an event calendar app built in React with Redux, Sagas, Material UI, Nod
 ![Table](documentation/images/viewEvent24HourCal.png)
 
 ## Create Event
-![Table](documentation/images/createEvent24hourCal.png)
+![Table](documentation/images/createEvent24HourCal.png)
 
 ### SETUP
 
