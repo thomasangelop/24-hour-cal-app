@@ -9,6 +9,12 @@ This is an event calendar app built in React with Redux, Sagas, Material UI, Nod
 ## Monthly View
 ![Table](documentation/images/monthlyView24HourCal.png)
 
+## View Event
+![Table](documentation/images/viewEvent24HourCal.png)
+
+## Create Event
+![Table](documentation/images/createEvent24hourCal.png)
+
 ### SETUP
 
 Create your PostgreSQL database and tables using the provided `database.sql` file. 
