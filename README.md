@@ -1,4 +1,4 @@
-![Table](documentation/images/readBackgroundCal.png)
+![Table](documentation/images/redBackgroundCal.png)
 # 24 Hour Cal App
 
 This is an event calendar app built in React with Redux, Sagas, Material UI, Node.js, Express.js, and Postgresql. It helps people easily create events. There is a weekly view, and monthly view. 
