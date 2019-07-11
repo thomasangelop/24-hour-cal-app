@@ -1,12 +1,17 @@
+![Table](public/readBackgroundCal.png)
 # 24 Hour Cal App
 
-This is a calendar app built in React with Redux, Sagas, Material UI, Node.js, Express.js, Postgresql, and Heroku. It helps people easily create events. There is a weekly view, monthly view, create new event dialog, and a preferences page. The preferences page allows the user to develop auto-fill information when creating new events. The user can also click on the events on the weekly view or monthly view to edit or delete the event. 
+This is an event calendar app built in React with Redux, Sagas, Material UI, Node.js, Express.js, and Postgresql. It helps people easily create events. There is a weekly view, and monthly view. 
 
-## Heroku Demo Coming Soon!
+## Weekly View
+![Table](public/weeklyView24HourCal.png)
+
+## Monthly View
+![Table](public/monthlyView24HourCal.png)
 
 ### SETUP
 
-Create your database and tables using the provided `database.sql` file. 
+Create your PostgreSQL database and tables using the provided `database.sql` file. 
 
 ```
 npm install
