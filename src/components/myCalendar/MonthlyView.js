@@ -118,19 +118,35 @@ class MonthlyView extends React.Component {
       onEventSelect = (event, inst) => {
         console.log('an event was clicked. event:', event, 'inst:', inst);
         console.log('what is the event', event.event);
+
+        //organization of variables for clearner look
+        const { 
+            color,
+            days_out_of_the_week,
+            end,
+            id,
+            person_id,
+            pref_type_name,
+            start,
+            text,
+            title,
+            description,
+            location
+         } = event.event;
+
         this.setState({ 
             openClick: true, 
-            color: event.event.color,
-            days_out_of_the_week: event.event.days_out_of_the_week,
-            end: event.event.end,
-            id: event.event.id,
-            person_id: event.event.person_id,
-            pref_type_name: event.event.pref_type_name,
-            start: event.event.start,
-            text: event.event.text,
-            title: event.event.title,
-            description: event.event.description,
-            location: event.event.location,
+            color,
+            days_out_of_the_week,
+            end,
+            id,
+            person_id,
+            pref_type_name,
+            start,
+            text,
+            title,
+            description,
+            location
             });
         console.log('what is new state?:', this.state);
         
