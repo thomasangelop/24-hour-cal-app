@@ -9,7 +9,7 @@
         "@material/fab": "^0.41.0",
         "@material/react-fab": "^0.7.0",
         "@mobiscroll/react": "file:./src/lib/mobiscroll-package/mobiscroll-react-4.4.2.tgz",
-        "axios": "^0.17.1",
+        "axios": "^0.19.0",
         "bcrypt": "^2.0.1",
         "body-parser": "^1.18.2",
         "cookie-session": "^2.0.0-beta.3",
