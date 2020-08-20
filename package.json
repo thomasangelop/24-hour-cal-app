@@ -10,7 +10,7 @@
         "@material/react-fab": "^0.7.0",
         "@mobiscroll/react": "file:./src/lib/mobiscroll-package/mobiscroll-react-4.4.2.tgz",
         "axios": "^0.17.1",
-        "bcrypt": "^2.0.1",
+        "bcrypt": "^5.0.0",
         "body-parser": "^1.18.2",
         "cookie-session": "^2.0.0-beta.3",
         "date-fns": "^1.29.0",
